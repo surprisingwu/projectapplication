@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/font-icons.css">
+    <link rel="stylesheet" href="../css/iuapmobile.um.css">
+    <link rel="stylesheet" href="../css/iscroll.css">
+    <link rel="stylesheet" href="../css/businessCard.css">
+    <script src="../js/summer.js" ></script>
+    <script src="../js/jquery.min.js" ></script>
+    <script src="../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+    <script src="../js/appsettings.js"></script>
+    <script src="../js/adaptive.js"></script>
+    <script src="../js/cvi_busy_lib.js"></script>
+    <script src="../js/iscroll.js"></script>
+    <script src="../js/bondsman.js"></script>
+</head>
+<body>
+<div class="wraper">
+    <header>
+        <i class="turnBackLastPage"></i>
+        <h3 class="headerTitle">担保人（必填）</h3>
+        <span class="headerOperation">保存</span>
+    </header>
+    <main>
+        <div class="photoWraper">
+            <div class="photoContainer">
+
+            </div>
+        </div>
+        <div class="userMesgWraper">
+            <form  id="userMesgWraper">
+                <ul class="userMesgWraperList">
+                    <li class="userMesgWraperListItem">
+                        <label for="userName" class="userMesgWraperListItemText">
+                            姓名
+                        </label>
+                        <input type="text" name="name" class="userMesgWraperListItemVal"  id="userName" placeholder="请输入/扫描">
+                    </li>
+                    <li class="userMesgWraperListItem specialConectPeopleItem">
+                        <label class="userMesgWraperListItemText">
+                            性别
+                        </label>
+                        <input type="text" name="sex" class="userMesgWraperListItemVal specialConectPeopleItem" id="select4_dummy" placeholder="请输入/扫描" >
+                        <select id='select4'>
+                            <option>男</option>
+                            <option>女</option>
+                            <option>未知的性别</option>
+                            <option>未说明的性别</option>
+                        </select>
+                    </li>
+                    <li class="userMesgWraperListItem">
+                        <label for="userNation" class="userMesgWraperListItemText">
+                            民族
+                        </label>
+                        <input type="text" name="nation" class="userMesgWraperListItemVal" id="userNation" placeholder="请输入/扫描">
+                    </li>
+                    <li class="userMesgWraperListItem specialConectPeopleItem">
+                        <label for="birthDate" class="userMesgWraperListItemText">
+                            出生日期
+                        </label>
+                        <input type="text" name="birthday" class="userMesgWraperListItemVal scroller-date" id="birthDate" placeholder="请输入/扫描">
+                    </li>
+                    <li class="userMesgWraperListItem specialConectPeopleItem">
+                        <label class="userMesgWraperListItemText">
+                            证件类型
+                        </label>
+                        <input type="text" name="document_type" class="userMesgWraperListItemVal"  placeholder="请输入/扫描" id='select1_dummy'>
+                        <select id='select1'>
+                            <option>身份证</option>
+                            <option>户口薄</option>
+                            <option>护照</option>
+                            <option>军官证</option>
+                            <option>士兵证</option>
+                            <option>临时身份证</option>
+                            <option>外国人居留证</option>
+                            <option>港澳居民来往内地通行证</option>
+                            <option>台湾同胞来往内地通行证</option>
+                            <option>警官证</option>
+                            <option>香港身份证</option>
+                            <option>澳门身份证</option>
+                            <option>台湾身份证</option>
+                            <option>其他证件</option>
+                        </select>
+                    </li>
+                    <li class="userMesgWraperListItem">
+                        <label for="cardNum" class="userMesgWraperListItemText">
+                            证件号码
+                        </label>
+                        <input type="text" name="document_id" class="userMesgWraperListItemVal" id="cardNum" placeholder="请输入/扫描">
+                    </li>
+                    <li class="userMesgWraperListItem">
+                        <label for="userAddress" class="userMesgWraperListItemText">
+                            住址
+                        </label>
+                        <input type="text" name="birth_address" class="userMesgWraperListItemVal" id="userAddress" placeholder="请输入/扫描">
+                    </li>
+                    <li class="userMesgWraperListItem">
+                        <label for="telPhoneNum" class="userMesgWraperListItemText">
+                            手机号
+                        </label>
+                        <input type="tel" name="mobile" class="userMesgWraperListItemVal" id="telPhoneNum" placeholder="请输入">
+                    </li>
+                    <li class="userMesgWraperListItem">
+                        <label for="componyName" class="userMesgWraperListItemText">
+                            单位名称
+                        </label>
+                        <input type="text" name="company_name" class="userMesgWraperListItemVal" id="componyName" placeholder="请输入">
+                    </li>
+                    <li class="userMesgWraperListItem specialConectPeopleItem">
+                        <label  class="userMesgWraperListItemText">
+                            行业类型
+                        </label>
+                        <input type="text" name="industry_type" class="userMesgWraperListItemVal" id="select2_dummy" placeholder="请选择">
+                        <select id='select2'>
+                            <option>农林牧渔业</option>
+                            <option>采掘业</option>
+                            <option>制造业</option>
+                            <option>电力燃气及水的生产和供应业</option>
+                            <option>建筑业</option>
+                            <option>交通运输仓储和邮政业</option>
+                            <option>信息传输计算机服务和软件业</option>
+                            <option>批发与零售业</option>
+                            <option>住宿和餐饮业</option>
+                            <option>金融业</option>
+                            <option>房地产业</option>
+                            <option>租赁和商务服务业</option>
+                            <option>科学研究技术服务业和地质勘察业</option>
+                            <option>水利环境和公共设施管理业</option>
+                            <option>居民服务和其他服务业</option>
+                            <option>教育</option>
+                            <option>卫生社会保障和社会福利业</option>
+                            <option>文化体育和娱乐业</option>
+                            <option>公共管理和社会组织</option>
+                            <option>国籍组织</option>
+                            <option>未知</option>
+                        </select>
+                    </li>
+                    <li class="userMesgWraperListItem">
+                        <label for="componyPhoneNum" class="userMesgWraperListItemText">
+                            单位电话
+                        </label>
+                        <input type="text" name="company_phone" class="userMesgWraperListItemVal" id="componyPhoneNum" placeholder="请输入">
+                    </li>
+                    <li class="userMesgWraperListItem specialConectPeopleItem">
+                        <label  class="userMesgWraperListItemText">
+                            职位
+                        </label>
+                        <input type="text" name="position" class="userMesgWraperListItemVal" id="select3_dummy" placeholder="请输入">
+                        <select id='select3'>
+                            <option>国家机关党群组织企业事业单位负责人</option>
+                            <option>专业技术人员</option>
+                            <option>办事人员和有关人员</option>
+                            <option>商业服务人员</option>
+                            <option>农林牧渔水利上产人员</option>
+                            <option>生产运输设备操作人员及有关人员</option>
+                            <option>军人</option>
+                            <option>不便分类的其他从业人员</option>
+                            <option>未知</option>
+                        </select>
+                    </li>
+                    <li class="userMesgWraperListItem">
+                        <label for="moneyGetMoney" class="userMesgWraperListItemText">
+                            月收入
+                        </label>
+                        <input type="text" name="income_month" class="userMesgWraperListItemVal" id="moneyGetMoney" placeholder="请输入">
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </main>
+    <footer>
+    </footer>
+</div>
+<div class="takePhotosTypeWraper" style="display: none">
+    <div class="closeTakePhotosTypeWraper"></div>
+    <div class="selectTakePhotosTypeContainer">
+        <div class="selectTakePhotosTypeItem" id="openCamaraDiv">
+            <span>拍摄</span>
+        </div>
+        <div class="selectTakePhotosTypeItem borderBottomNone" id="openAlbumDiv">
+            <span>从手机相册选择</span>
+        </div>
+        <button class="selectTakePhotosTypeCancelBtn">取消</button>
+    </div>
+</div>
+</body>
+</html>

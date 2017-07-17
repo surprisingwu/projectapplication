@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/font-icons.css">
+    <link rel="stylesheet" href="../css/iuapmobile.um.css">
+    <link rel="stylesheet" href="../css/iscroll.css">
+    <link rel="stylesheet" href="../css/businessCard.css">
+    <script src="../js/summer.js" ></script>
+    <script src="../js/jquery.min.js" ></script>
+    <script src="../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+    <script src="../js/appsettings.js"></script>
+    <script src="../js/iscroll.js"></script>
+    <script src="../js/adaptive.js"></script>
+</head>
+<body>
+<div class="wraper">
+    <header>
+        <i class="turnBackLastPage"></i>
+        <h3 class="headerTitle">联系人</h3>
+        <span class="headerOperation">保存</span>
+    </header>
+    <main>
+        <ul class="userMesgWraperList">
+            <li class="userMesgWraperListItem conectPeopleItem">
+                <label for="username" class="userMesgWraperListItemText">
+                    姓名
+                </label>
+                <input type="text" class="userMesgWraperListItemVal" id="username" placeholder="请输入">
+            </li>
+            <li class="userMesgWraperListItem conectPeopleItem">
+                <label for="telPhoneNum" class="userMesgWraperListItemText">
+                    手机号
+                </label>
+                <input type="tel" class="userMesgWraperListItemVal"  id="telPhoneNum" placeholder="请输入手机号">
+            </li>
+            <li class="userMesgWraperListItem conectPeopleItem specialConectPeopleItem">
+                <label for="select1_dummy" class="userMesgWraperListItemText">
+                    与承租人关系
+                </label>
+                <input type="text" class="userMesgWraperListItemVal" id="select1_dummy" placeholder="请选择">
+                <select id='select1'>
+                    <option>亲戚</option>
+                    <option>同事</option>
+                    <option>朋友</option>
+                    <option>大哥</option>
+                    <option>配偶</option>
+                    <option>兄弟</option>
+                </select>
+            </li>
+        </ul>
+    </main>
+    <footer>
+
+    </footer>
+</div>
+</body>
+<script>
+    document.addEventListener("deviceready", function () {
+        document.addEventListener("backbutton", function () {
+            try {
+                localStorage.removeItem("navIndex");
+            } catch (e) {
+            }
+            window.location.href = "userMesg.html";
+        }, false);
+    }, false);
+    summerready=function () {
+        $(".turnBackLastPage").turnBackLastPage("userMesg.html");
+        try{
+            var id = localStorage.getItem("id")
+        } catch (e){
+
+        }
+        if(id === null) {
+            alert("请先新增个人档案！")
+            return;
+        }
+        $(function () {
+            // var curr = new Date().getFullYear();
+            var opt = {
+                'date': {
+                    preset: 'date'
+                },
+                'select': {
+                    preset: 'select'
+                }
+            };
+            $('#select1').scroller('destroy').scroller(
+                $.extend(opt['select'], {
+                    theme: "ios7",
+                    mode: "scroller",
+                    display: "bottom",
+                    animate: ""
+                })
+            );
+        });
+        $(".headerOperation").on("click",function () {
+            //手机号校验正则 13，13，15，17，18 开头  11位
+            var telTestReg = /^1[3|4|5|7|8][0-9]{9}$/
+            var name = $("#username").val().trim();
+            var phone = $("#telPhoneNum").val().trim();
+            var relationship = $("#select1_dummy").val().trim();
+            if (name == ""||phone==""||relationship==""){
+                alert("您输入的信息不完整！");
+                return;
+            }
+            if(!telTestReg.test(phone)){
+                alert("您输入的手机号不存在！");
+                return;
+            }
+            var jsonData = "name="+name+"&phone="+phone+"&relationship="+relationship+"&contacts_id="+id;
+            $_ajax._post({
+                url: "com.yyjr.ifbp.fin.controller.IFBPFINController",
+                handler: "handler",
+                data: {
+                    "transtype": "urlparamrequest",
+                    "requrl": appSettings.proxy+"/fin-ifbp-base/fin/mobile/user/addContacts",
+                    "reqmethod": "POST",
+                    "reqparam": jsonData,
+                },
+                success: "mycallback()",
+                err: "myerror()"
+            })
+        })
+    }
+    function mycallback(data) {
+        window.location.href = "userMesg.html";
+    }
+    function myerror(e) {
+        alert("保存失败！")
+    }
+</script>
+</html>

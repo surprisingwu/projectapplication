@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/font-icons.css">
+    <link rel="stylesheet" href="../css/iuapmobile.um.css">
+    <link rel="stylesheet" href="../css/businessCard.css">
+    <script src="../js/summer.js" ></script>
+    <script src="../js/jquery.min.js" ></script>
+    <script src="../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+    <script src="../js/appsettings.js"></script>
+    <script src="../js/adaptive.js"></script>
+    <script src="../js/doT.js"></script>
+    <script src="../js/bankCardAccount.js"></script>
+</head>
+<body>
+<div class="wraper">
+    <header>
+        <i class="turnBackLastPage"></i>
+        <h3 class="headerTitle">银行账户</h3>
+        <span class="headerOperation">新增</span>
+    </header>
+    <main class="backgroundNone">
+        <ul class="bankCardListWraper">
+        </ul>
+    </main>
+    <footer>
+
+    </footer>
+</div>
+    <script id="bankCardListWraper" type="text/x-dot-template">
+        {{ for (var i=0;i<it.length;i++ ){ }}
+        <li class="bankCardListItem">
+            <div class="headSomeMesg">
+                <div class="iconWraper">
+                </div>
+                <div class="headSomeMesgDetail">
+                        <span class="bankName">
+                            {{=it[i].bankName}}
+                        </span>
+                    <span class= "bankCardType">
+                            {{=it[i].bankCardType}}
+                        </span>
+                </div>
+            </div>
+            <div class="bankCardNum">
+                {{=it[i].bankCardNum}}
+            </div>
+        </li>
+    {{ } }}
+</script>
+</body>
+</html>

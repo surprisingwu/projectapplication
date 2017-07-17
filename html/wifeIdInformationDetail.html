@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/font-icons.css">
+    <link rel="stylesheet" href="../css/iuapmobile.um.css">
+    <link rel="stylesheet" href="../css/businessCard.css">
+    <script src="../js/summer.js" ></script>
+    <script src="../js/jquery.min.js" ></script>
+    <script src="../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+    <script src="../js/appsettings.js"></script>
+    <script src="../js/adaptive.js"></script>
+    <script src="../js/wifeIdInformation.js"></script>
+</head>
+<body>
+<div class="wraper">
+    <header>
+        <i class="turnBackLastPage"></i>
+        <h3 class="headerTitle">配偶信息</h3>
+        <span class="headerOperation" style="opacity: 0">下一步</span>
+    </header>
+    <main>
+        <div class="photoWraper">
+            <div class="photoContainer">
+
+            </div>
+        </div>
+        <div class="userMesgWraper">
+            <form  id="userMesgWraper">
+                <ul class="userMesgWraperList" id="renderContainer">
+
+                </ul>
+            </form>
+        </div>
+    </main>
+    <footer>
+    </footer>
+</div>
+<script>
+    document.addEventListener("deviceready", function () {
+        document.addEventListener("backbutton", function () {
+            try {
+                localStorage.removeItem("navIndex");
+            } catch (e) {
+            }
+            window.location.href = "userMesg.html";
+        }, false);
+    }, false);
+    summerready = function () {
+        $(".turnBackLastPage").turnBackLastPage("userMesg.html");
+        var data = JSON.parse(localStorage.getItem("data"));
+        var matesexVal = data.matesex;
+        var matecertypeVal = data.matecertype;
+        var mateindustytypeVal = data.mateindustrytype;
+        var matedutyVal = data.mateduty;
+        var dateFat = new Date(Number(data.matebirth)).Format("yyyy-MM-dd")
+        var dataArr = [
+            {name:"姓名",value:data.matename||"空"},
+            {name:"性别",value:returnVal(selectTypeObj.sexObj,matesexVal)},
+            {name:"民族",value:data.matenation||"空"},
+            {name:"出生日期",value:dateFat||"空"},
+            {name:"证件类型",value:returnVal(selectTypeObj.cardTypeObj,matecertypeVal)},
+            {name:"证件号码",value:data.matecerid||"空"},
+            {name:"住址",value:data.mateaddr||"空"},
+            {name:"手机号",value:data.matemobile||"空"},
+            {name:"单位名称",value:data.mateworkunit||"空"},
+            {name:"行业类型",value:returnVal(selectTypeObj.mateindustytypeObj,mateindustytypeVal)||"空"},
+            {name:"单位电话",value:data.matecomptel||"空"},
+            {name:"职位",value:returnVal(selectTypeObj.matedutyObj,matedutyVal)||"空"},
+            {name:"月收入",value:data.mateincome||"空"},
+        ]
+        var mateidimg = data.mateidimg;
+        var $photoContainer = $(".photoContainer");
+        //渲染图片
+      $.renderIMG($photoContainer,mateidimg)
+        renderIndefienceDetail(dataArr);
+        //渲染   详情数据列表
+        function renderIndefienceDetail(dataArr) {
+            var $renderContainer = $("#renderContainer");
+            var htmlStr = "";
+            dataArr.forEach(function (item, index) {
+                if (item.value !== undefined) {
+                    htmlStr += '<li class="userMesgWraperListItem"><label  class="userMesgWraperListItemText">' + item.name + '</label><input type="text" class="userMesgWraperListItemVal" value=' + item.value + '  readonly></li>';
+                }
+            })
+            $renderContainer.append(htmlStr);
+        }
+    }
+    function returnVal(obj,numStr) {
+        var returnVal = "";
+        for (var key in obj) {
+            if (obj[key] === numStr){
+                returnVal = key
+            }
+        }
+        return returnVal;
+    }
+</script>
+</body>
+</html>

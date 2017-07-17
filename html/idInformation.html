@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/font-icons.css">
+    <link rel="stylesheet" href="../css/iuapmobile.um.css">
+    <link rel="stylesheet" href="../css/iscroll.css">
+    <link rel="stylesheet" href="../css/businessCard.css">
+    <script src="../js/summer.js" ></script>
+    <script src="../js/jquery.min.js" ></script>
+    <script src="../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+    <script src="../js/cvi_busy_lib.js"></script>
+    <script src="../js/appsettings.js"></script>
+    <script src="../js/adaptive.js"></script>
+    <script src="../js/iscroll.js"></script>
+    <script src="../js/idInformation.js"></script>
+</head>
+<body>
+<div class="wraper">
+    <header>
+        <i class="turnBackLastPage"></i>
+        <h3 class="headerTitle">个人档案（必填）</h3>
+        <span class="headerOperation">保存</span>
+    </header>
+    <main>
+        <div class="photoWraper">
+            <div class="photoContainer">
+
+            </div>
+        </div>
+        <div class="userMesgWraper">
+            <form  id="userMesgWraper">
+                <ul class="userMesgWraperList">
+                    <li class="userMesgWraperListItem">
+                        <label for="userName" class="userMesgWraperListItemText">
+                            姓名
+                        </label>
+                        <input type="text" name="name" class="userMesgWraperListItemVal"  id="userName" placeholder="请输入/扫描" >
+                    </li>
+                    <li class="userMesgWraperListItem specialConectPeopleItem">
+                        <label  class="userMesgWraperListItemText">
+                            性别
+                        </label>
+                        <input type="text" name="sex" class="userMesgWraperListItemVal" id="select3_dummy" placeholder="请输入/扫描">
+                        <select id='select3'>
+                            <option>男</option>
+                            <option>女</option>
+                            <option>未知的性别</option>
+                            <option>未说明的性别</option>
+                        </select>
+
+                    </li>
+                    <li class="userMesgWraperListItem">
+                        <label for="userNation" class="userMesgWraperListItemText">
+                            民族
+                        </label>
+                        <input type="text" name="nation" class="userMesgWraperListItemVal" id="userNation" placeholder="请输入/扫描">
+                    </li>
+                    <li class="userMesgWraperListItem specialConectPeopleItem">
+                        <label for="birthDate" class="userMesgWraperListItemText">
+                            出生日期
+                        </label>
+                        <input type="text" name="birthday" class="userMesgWraperListItemVal scroller-date" id="birthDate" placeholder="请选择/扫描">
+                    </li>
+                    <li class="userMesgWraperListItem specialConectPeopleItem">
+                        <label class="userMesgWraperListItemText">
+                            证件类型
+                        </label>
+                        <input type="text" name="document_type" class="userMesgWraperListItemVal" placeholder="请选择" id='select2_dummy'>
+                        <select id='select2'>
+                            <option>身份证</option>
+                            <option>户口薄</option>
+                            <option>护照</option>
+                            <option>军官证</option>
+                            <option>士兵证</option>
+                            <option>临时身份证</option>
+                            <option>外国人居留证</option>
+                            <option>港澳居民来往内地通行证</option>
+                            <option>台湾同胞来往内地通行证</option>
+                            <option>警官证</option>
+                            <option>香港身份证</option>
+                            <option>澳门身份证</option>
+                            <option>台湾身份证</option>
+                            <option>其他证件</option>
+                        </select>
+                    </li>
+                    <li class="userMesgWraperListItem">
+                        <label for="cardNum" class="userMesgWraperListItemText">
+                            证件号码
+                        </label>
+                        <input type="text" name="document_id" class="userMesgWraperListItemVal" id="cardNum" placeholder="请输入/扫描">
+                    </li>
+                    <li class="userMesgWraperListItem userAddressAfter">
+                        <label for="userAddress" class="userMesgWraperListItemText">
+                            住址
+                        </label>
+                        <input type="text" name="birth_address" class="userMesgWraperListItemVal" id="userAddress" placeholder="请输入/扫描">
+                    </li>
+                    <li class="userMesgWraperListItem specialConectPeopleItem">
+                        <label for="select1_dummy" class="userMesgWraperListItemText">
+                            婚姻状况
+                        </label>
+                        <input type="text" name="marriage" class="userMesgWraperListItemVal" id="select1_dummy" placeholder="请选择">
+                        <select id='select1'>
+                            <option>未婚</option>
+                            <option>已婚</option>
+                            <option>初婚</option>
+                            <option>再婚</option>
+                            <option>复婚</option>
+                            <option>丧偶</option>
+                            <option>离婚</option>
+                            <option>未说明的婚姻类型</option>
+                        </select>
+                    </li>
+                    <li class="specialUserMesgListItem">
+                        <span class="specialUserMesgListItemText">
+                            日常半身照
+                        </span>
+                        <span class="specialUserMesgListItemIcon"></span>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </main>
+    <footer>
+    </footer>
+</div>
+
+<div class="takePhotosTypeWraper" style="display: none">
+    <div class="closeTakePhotosTypeWraper"></div>
+    <div class="selectTakePhotosTypeContainer">
+        <div class="selectTakePhotosTypeItem" id="openCamaraDiv">
+            <span>拍摄</span>
+        </div>
+        <div class="selectTakePhotosTypeItem borderBottomNone" id="openAlbumDiv">
+            <span>从手机相册选择</span>
+        </div>
+        <button class="selectTakePhotosTypeCancelBtn">取消</button>
+    </div>
+</div>
+
+</body>
+</html>

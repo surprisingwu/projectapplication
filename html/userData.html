@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/font-icons.css">
+    <link rel="stylesheet" href="../css/iuapmobile.um.css">
+    <link rel="stylesheet" href="../css/userData.css">
+    <script src="../js/summer.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/Frameworks/iuapmobile.frameworks.ui.js"></script>
+    <script src="../js/appsettings.js"></script>
+    <script src="../js/iscroll.js"></script>
+    <script src="../js/adaptive.js"></script>
+    <script src="../js/userData.js"></script>
+</head>
+<body>
+<div class="wraper">
+    <header>
+
+        <i class="turnBackLastPage"></i>
+        <h3 class="headerTitle">资料</h3>
+        <span class="headerOperation">编辑</span>
+    </header>
+    <nav>
+        <ul class="navWraper">
+            <li class="navItem" id="userDataMesg">
+                <span class="navItemText navItemActive">
+                    承租人资料
+                </span>
+            </li>
+            <li class="navItem" id="assureDataMesg">
+                <span class="navItemText">
+                    担保人资料
+                </span>
+            </li>
+        </ul>
+    </nav>
+    <main class="backgroundNone marginTop88">
+        <div class="userDataMesg" style="display: block">
+            <ul class="userDataMesgWraper">
+                <li class="userDataMesgItem">
+                    <div class="userDataMesgItemTitle">
+                        <span class="userDataMesgItemText">行驶证</span>
+                    </div>
+                    <div class="userDataMesgItemImg">
+                        <div class="userDataMesgImgWraper camaraIMG">
+                            <div class="userDataMesgImgDelete" style = "display: none;">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+                <li class="userDataMesgItem">
+                    <div class="userDataMesgItemTitle">
+                        <span class="userDataMesgItemText">身份证</span>
+                    </div>
+                    <div class="userDataMesgItemImg">
+                        <div class="userDataMesgImgWraper camaraIMG" id="userId">
+                            <div class="userDataMesgImgDelete" style = "display: none;">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+                <li class="userDataMesgItem" style="display: none">
+                    <div class="userDataMesgItemTitle">
+                        <span class="userDataMesgItemText">名片</span>
+                    </div>
+                    <div class="userDataMesgItemImg">
+                        <div class="userDataMesgImgWraper camaraIMG">
+                            <div class="userDataMesgImgDelete" style = "display: none;">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+                <li class="userDataMesgItem">
+                    <div class="userDataMesgItemTitle">
+                        <span class="userDataMesgItemText">日常半身照</span>
+                    </div>
+                    <div class="userDataMesgItemImg">
+                        <div class="userDataMesgImgWraper camaraIMG" id="upBody">
+                            <div class="userDataMesgImgDelete" style = "display: none;">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+                <li class="userDataMesgItem">
+                    <div class="userDataMesgItemTitle">
+                        <span class="userDataMesgItemText">配偶身份证</span>
+                    </div>
+                    <div class="userDataMesgItemImg">
+                        <div class="userDataMesgImgWraper camaraIMG" id="wifeId">
+                            <div class="userDataMesgImgDelete" style = "display: none;">
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+                <li class="userDataMesgItem">
+                    <div class="userDataMesgItemTitle">
+                        <span class="userDataMesgItemText">银行卡</span>
+                    </div>
+                    <div class="userDataMesgMuchImg" id="bankCard">
+                        <div class="userDataMesgImgWraper camaraIMG" id="addBankCard">
+                            <div class="userDataMesgImgDelete" style = "display: none;" id="placeholderImg">
+
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="userDataMesgItem">
+                    <div class="userDataMesgItemTitle">
+                        <span class="userDataMesgItemText">工作证明</span>
+                    </div>
+                    <div class="userDataMesgMuchImg"  id="showWorkImg">
+                        <div class="userDataMesgImgWraper addMuchPhoto" id="work_img">
+                        </div>
+
+                    </div>
+                </li>
+                <li class="userDataMesgItem">
+                    <div class="userDataMesgItemTitle">
+                        <span class="userDataMesgItemText">收支证明</span>
+                    </div>
+                    <div class="userDataMesgMuchImg" id=showPaymentsImg>
+                        <div class="userDataMesgImgWraper addMuchPhoto" id="payments_img">
+                        </div>
+
+                    </div>
+                </li>
+                <li class="userDataMesgItem">
+                    <div class="userDataMesgItemTitle">
+                        <span class="userDataMesgItemText">子女</span>
+                    </div>
+                    <div class="userDataMesgMuchImg" id="showChildImg">
+                        <div class="userDataMesgImgWraper addMuchPhoto" id="child_img">
+                        </div>
+
+                    </div>
+                </li>
+                <li class="userDataMesgItem">
+                    <div class="userDataMesgItemTitle">
+                        <span class="userDataMesgItemText">房产证明</span>
+                    </div>
+                    <div class="userDataMesgMuchImg" id="showEstateinfoImg">
+                        <div class="userDataMesgImgWraper addMuchPhoto" id="estateinfo_img">
+                        </div>
+
+                    </div>
+                </li>
+                <li class="userDataMesgItem">
+                    <div class="userDataMesgItemTitle">
+                        <span class="userDataMesgItemText">资产档案</span>
+                    </div>
+                    <div class="userDataMesgMuchImg" id="showCapitalImg">
+                        <div class="userDataMesgImgWraper addMuchPhoto" id="capital_img">
+                        </div>
+                    </div>
+                </li>
+                <li class="userDataMesgItem">
+                    <div class="userDataMesgItemTitle">
+                        <span class="userDataMesgItemText">其它</span>
+                    </div>
+                    <div class="userDataMesgMuchImg" id="showMediaImg">
+                        <div class="userDataMesgImgWraper addMuchPhoto" id="media_img">
+                        </div>
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="assureDataMesg" style="display: none">
+            <ul class="userDataMesgWraper">
+                <li class="userDataMesgItem">
+                    <div class="userDataMesgItemTitle">
+                        <span class="userDataMesgItemText">有效身份证</span>
+                    </div>
+                    <div class="userDataMesgItemImg">
+                        <div class="userDataMesgImgWraper" >
+                            <div class="userDataMesgImgDelete" style = "display: none;">
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+                <li class="userDataMesgItem">
+                    <div class="userDataMesgItemTitle">
+                        <span class="userDataMesgItemText">其它</span>
+                    </div>
+                    <div class="userDataMesgMuchImg" id="showBondManImg">
+                        <div class="userDataMesgImgWraper addMuchPhoto" id="">
+                        </div>
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </main>
+    <footer>
+        <div class="commonBottomBtnContainer">
+            <div class="commonBottomBtn" id="baojia">
+                <div class="commonBottomBtnWraper">
+                    <span class="commonBottomBtnIconWraper baojia"></span>
+                    <span class="commonBottomText" id="baojiaText">报价</span>
+                </div>
+            </div>
+            <div class="commonBottomBtn" id="chengzuren">
+                <div class="commonBottomBtnWraper">
+                    <span class="commonBottomBtnIconWraper chengzuren"></span>
+                    <span class="commonBottomText" id="chengzurenText">承租人</span>
+                </div>
+            </div>
+            <div class="commonBottomBtn" id="ziliao">
+                <div class="commonBottomBtnWraper">
+                    <span class="commonBottomBtnIconWraper ziliao"></span>
+                    <span class="commonBottomText" id="ziliaoText">资料</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+<!--弹出层，打开相机和相册-->
+<div class="openCamaraOrAlbumWraper" style="display: none">
+    <div class="closeTotastHandler"></div>
+    <div class="operationContainer">
+        <ul class="operationListWraper">
+            <li class="operationBtnContainer" id="openCamara">
+                <span class="operationBtnText">拍摄</span>
+            </li>
+            <li class="operationBtnContainer" id="openAlbum">
+                <span class="operationBtnText">从手机相册选择</span>
+            </li>
+        </ul>
+        <button class="operationCancelBtn">取消</button>
+    </div>
+</div>
+</body>
+
+</html>

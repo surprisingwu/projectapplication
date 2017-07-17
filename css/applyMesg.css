@@ -1,0 +1,153 @@
+/*头部的一些样式*/
+.um-header{
+    height: 1.173333rem;
+    position: fixed;
+    width: 100%;
+    background-color: #fff;
+    z-index: 99;
+    border-bottom: 0.026667rem solid #2DBBFA;
+    box-sizing: border-box;
+    color: #2DBBFA;
+    -webkit-border-image: none;
+    border-image: none;
+}
+
+i.turnBackLastPage {
+    position: absolute;
+    left: 0.4rem;
+    top: 0;
+    width: 1.333333rem;
+    height: 100%;
+    background: url(../img/back@2x.png) no-repeat left center;
+    background-size: 0.266667rem 0.533333rem;
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+    i.turnBackLastPage{
+       background: url("../img/back@3x.png") no-repeat left center; 
+        background-size: 0.266667rem 0.533333rem;
+    }
+}
+.um-header h3{
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 17px;
+    color: #2DBBFA;
+    flex: 1;
+}
+span.historyOperation,span.checkOperation{
+    position: absolute;
+    right: 0.4rem;
+    top: 0;
+    width: 1.333333rem;
+    height: 100%;
+    display: inline-block;
+    line-height: 1.173333rem;
+    color: #2DBBFA;
+    font-size: 14px;
+}
+span.historyOperation{
+    text-align: right;
+}
+span.checkOperation{
+    right: 1.733333rem;
+    text-align: center;
+}
+
+/*中间内容部分*/
+.um-listview-adaptation{
+    padding-top: 1.173333rem;
+}
+.um-list{
+    border-top: none;
+    border-bottom: none;
+}
+.um-list .um-list-item-inner:after{
+    height: 0;
+}
+li.um-listview-row {
+    padding-left: 0.4rem;
+    height: 1.866667rem;
+    width: 100%;
+    position: relative;
+}
+a.um-list-item.um-swipe-action.um-no-icon {
+    border-bottom: 0.026667rem solid #F7F7F7;
+    height: 100%;
+    width: 100%;
+    padding-right: 0.8rem;
+    box-sizing: border-box;
+}   
+.listTopMesg {
+    display: flex;
+}
+span.listTopMesgLeft {
+    font-size: 15px;
+    color: #333;
+    width: 4.186667rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 0.48rem;
+}
+span.listTopMesgRight {
+    font-size: 13px;
+    flex: 1;
+    text-align: right;
+    color: #999;
+    line-height: 0.48rem;
+}
+.listBottomMesg {
+    display: flex;
+    margin-top: 0.213333rem;
+}
+span.listBottomMesgLeft {
+    font-size: 15px;
+    color: #333;
+    line-height: 0.48rem;
+}
+span.listBottomMesgRight {
+    font-size: 13px;
+    color: #2DBBFA;
+    flex: 1;
+    text-align: right;
+}
+span.um-swipe-btn{
+    width: 1.733333rem;
+    height: 100%;
+}
+span.confirmBtn,span.deleteBtn{
+    background-color: #B4D551;
+    font-size: 15px;
+    line-height: 1.866667rem;
+    text-align: center;
+    width: 1.733333rem;
+    height: 100%;
+}
+span.deleteBtn{
+    background-color: #F56767;
+}
+.um-list .um-list-item-body{
+    padding-top: 0.32rem;
+}
+.um-list .um-list-item-inner:after{
+    height: 0;
+}
+i.listArrowContainer {
+    position: absolute;
+    top: 0;
+    right: -0.8rem;
+    width: 0.8rem;
+    height: 100%;
+    display: block;
+    background: url(../img/rightarrow@2x.png) no-repeat center;
+    background-size: 0.213333rem 0.4rem;
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+   i.listArrowContainer{
+       background: url("../img/rightarrow@3x.png") no-repeat center;
+       background-size: 0.213333rem 0.4rem;
+    }
+}
+.um-listview-down {
+    font-size: 15px;
+}

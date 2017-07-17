@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/font-icons.css">
+    <link rel="stylesheet" href="../css/iuapmobile.um.css">
+    <link rel="stylesheet" href="../css/businessCard.css">
+    <script src="../js/summer.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/Frameworks/iuapmobile.frameworks.ui.js"></script>
+    <script src="../js/cvi_busy_lib.js"></script>
+    <script src="../js/appsettings.js"></script>
+    <script src="../js/adaptive.js"></script>
+    <script src="../js/businessCard.js"></script>
+</head>
+<body>
+<div class="wraper">
+    <header>
+        <i class="turnBackLastPage"></i>
+        <h3 class="headerTitle">联系方式</h3>
+        <span class="headerOperation">保存</span>
+    </header>
+    <main>
+        <div class="photoWraper">
+            <div class="photoContainer businesscardicon">
+            </div>
+        </div>
+        <div class="userMesgWraper">
+            <form id="userMesgWraper">
+                <ul class="userMesgWraperList">
+                    <li class="userMesgWraperListItem">
+                        <label for="telPhoneNum" class="userMesgWraperListItemText">
+                            手机号
+                        </label>
+                        <input type="tel" class="userMesgWraperListItemVal" id="telPhoneNum" placeholder="请输入/扫描" name="mobile">
+                    </li>
+                    <li class="userMesgWraperListItem">
+                        <label for="emailAdress" class="userMesgWraperListItemText">
+                            电子邮箱
+                        </label>
+                        <input type="text" class="userMesgWraperListItemVal" id="emailAdress" placeholder="请输入/扫描" name="email">
+                    </li>
+                    <li class="userMesgWraperListItem">
+                        <label for="wechatNumber" class="userMesgWraperListItemText">
+                            微信号
+                        </label>
+                        <input type="text" class="userMesgWraperListItemVal" id="wechatNumber" placeholder="请输入/扫描" name="wechat">
+                    </li>
+                    <li class="userMesgWraperListItem">
+                        <label for="qqNumber" class="userMesgWraperListItemText">
+                            QQ号
+                        </label>
+                        <input type="number" class="userMesgWraperListItemVal" id="qqNumber" placeholder="请输入/扫描" name="connect_qq">
+                    </li>
+                    <li class="userMesgWraperListItem">
+                        <label for="mailingAddress" class="userMesgWraperListItemText">
+                            通讯地址
+                        </label>
+                        <input type="text" class="userMesgWraperListItemVal" id="mailingAddress" placeholder="请输入/扫描" name="address">
+                    </li>
+                    <li class="userMesgWraperListItem">
+                        <label for="postalcode" class="userMesgWraperListItemText">
+                            邮政编码
+                        </label>
+                        <input type="text" class="userMesgWraperListItemVal" id="postalcode" placeholder="请输入/扫描" name="msgzipcode">
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </main>
+    <footer>
+
+    </footer>
+</div>
+<div class="takePhotosTypeWraper" style="display: none">
+    <div class="closeTakePhotosTypeWraper"></div>
+    <div class="selectTakePhotosTypeContainer">
+        <div class="selectTakePhotosTypeItem" id="openCamaraDiv">
+            <span>拍摄</span>
+        </div>
+        <div class="selectTakePhotosTypeItem borderBottomNone" id="openAlbumDiv">
+            <span>从手机相册选择</span>
+        </div>
+        <button class="selectTakePhotosTypeCancelBtn">取消</button>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/font-icons.css">
+    <link rel="stylesheet" href="../css/iuapmobile.um.css">
+    <link rel="stylesheet" href="../css/iscroll.css">
+    <link rel="stylesheet" href="../css/businessCard.css">
+    <script src="../js/summer.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/Frameworks/iuapmobile.frameworks.ui.js"></script>
+    <script src="../js/appsettings.js"></script>
+    <script src="../js/iscroll.js"></script>
+    <script src="../js/doT.js"></script>
+    <script src="../js/adaptive.js"></script>
+</head>
+<body>
+<div class="wraper">
+    <header>
+        <i class="turnBackLastPage"></i>
+        <h3 class="headerTitle">联系人</h3>
+        <span class="headerOperation">新增</span>
+    </header>
+    <main class="backgroundNone">
+        <ul class="connectPeopleDetailWraper">
+        </ul>
+    </main>
+    <footer>
+
+    </footer>
+</div>
+<script id="bankCardListWraper" type="text/x-dot-template">
+    {{ for (var i=0;i<it.length;i++ ){ }}
+    <li class="connectPeopleDetailItem">
+        <div class="connectPeopleDetailName">
+            <span class="connectPeopleDetailNameVal">{{=it[i].name}}</span>
+        </div>
+        <div class="connectPeopleDetaiCommonWraper">
+            <span class="connectPeopleDetailCommonText">手机</span>
+            <span class="connectPeopleDetailCommonVal">{{=it[i].phone}}</span>
+        </div>
+        <div class="connectPeopleDetaiCommonWraper">
+            <span class="connectPeopleDetailCommonText">与承租人关系</span>
+            <span class="connectPeopleDetailCommonVal">{{=it[i].relationship}}</span>
+        </div>
+    </li>
+    {{ } }}
+</script>
+</body>
+<script>
+    document.addEventListener("deviceready", function () {
+        document.addEventListener("backbutton", function () {
+            try {
+                localStorage.removeItem("navIndex");
+            } catch (e) {
+            }
+            window.location.href = "userMesg.html";
+        }, false);
+    }, false);
+    summerready = function () {
+        var data = JSON.parse(localStorage.getItem("data"));
+        $(".turnBackLastPage").turnBackLastPage("userMesg.html")
+        var arrMesg = data.contacts_id;
+        var dataArr = returnArr(arrMesg);
+        var $connectPeopleDetailWraper = $(".connectPeopleDetailWraper");
+        $(".headerOperation").on("click",function () {
+            window.location.href = "conectWay.html";
+        })
+        var arrText =  doT.template($("#bankCardListWraper").text());
+        $connectPeopleDetailWraper.html(arrText(dataArr));
+        function returnArr(arr) {
+            if (arr.length === 0) {
+                return;
+            }
+            var dataArr = [];
+            arr.forEach(function (item,index) {
+                var obj = {};
+                obj.name = item.name;
+                obj.relationship = item.relationship;
+                obj.phone = item.phone;
+                dataArr.push(obj)
+            })
+            return   dataArr
+        }
+    }
+
+</script>
+</html>

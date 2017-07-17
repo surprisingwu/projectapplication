@@ -1,0 +1,318 @@
+/*头部的样式*/
+header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 1.173333rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0;
+    box-sizing: border-box;
+    border-bottom: 0.026667rem solid #2DBBFA;
+    background: #fff;
+    padding: 0 0.4rem;
+    z-index: 2;
+}
+i.turnBackLastPage {
+    width: 1.866667rem;
+    height: 100%;
+    background: url(../img/back@2x.png) no-repeat left center;
+    background-size: 0.266667rem 0.533333rem;
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+    i.turnBackLastPage{
+       background: url("../img/back@3x.png") no-repeat left center; 
+        background-size: 0.266667rem 0.533333rem;
+    }
+}
+h3{
+	margin-top: 0;
+	margin-bottom: 0;
+	font-size: 17px;
+	color: #2DBBFA;
+}
+.headerOperation{
+	width: 1.866667rem;
+	height: 1.173333rem;
+	text-align: right;
+	font-size: 15px;
+	line-height: 1.173333rem;
+	color: #2DBBFA;
+}
+nav{
+	height: 1.173333rem;
+	width: 100%;
+	position: fixed;
+	top: 1.173333rem;
+	left: 0;
+	font-size: 0;
+	z-index: 2;
+	border-bottom: 0.026667rem solid #CCC;
+	box-sizing: border-box;
+}
+ul.navWraper{
+	height: 100%;
+	width: 100%;
+}
+.navItem{
+	width: 50%;
+	height: 100%;
+	font-size: 16px;
+	line-height: 1.173333rem;
+	float: left;
+	text-align: center;
+	color: #666;
+	background: #fff;
+}
+.navItemActive {
+	border-bottom: 0.053333rem solid #2DBBFA;
+	color: #2DBBFA;
+	box-sizing: border-box;
+	border-collapse: collapse;
+}
+span.navItemText {
+    display: inline-block;
+    width: 80%;
+    height: 100%;
+}
+/*中间内容的一些样式*/
+main.marginTop88{
+	margin-top: 2.346667rem;
+	padding-bottom: 1.333333rem;
+}
+li.userDataMesgItem{
+	background: #fff;
+}
+div.userDataMesgItemTitle{
+	padding: 0 0.4rem;
+	background: #F7F7F7 !important;
+	font-size: 15px;
+	color: #999;
+	line-height: 0.933333rem; 
+}
+div.userDataMesgItemImg{
+	height: 3.733333rem;
+	background: #fff;
+	width: 100%;
+	padding-left: 0.4rem;
+	padding-top: 0.666667rem;
+}
+div.userDataMesgImgWraper{
+	width: 2.4rem;
+	height: 2.4rem;
+	position: relative;
+	background: url("../img/addicon@2x.png") no-repeat center;
+	background-size: contain;
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+    div.userDataMesgImgDelete{
+       background: url("../img/shanchu@3x.png") no-repeat center; 
+        background-size: 0.693333rem  0.693333rem;
+    }
+}
+div.camaraIMG{
+		background: url("../img/caramahehe.png") no-repeat center;
+	background-size: contain;
+}
+div.userDataMesgImgDelete{
+	position: absolute;
+	top: 0;
+	right: 0;
+	background: url("../img/shanchu@2x.png") no-repeat center;
+	background-size: 0.693333rem  0.693333rem;
+	height: 0.693333rem;
+	width: 0.693333rem;
+}
+div#bankCard {
+    padding-bottom: 0.4rem;
+}
+/*底部按钮的一些样式*/
+footer{
+	height: 1.333333rem;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	font-size: 0;
+	width: 100%;
+	/*background: rgba(255,255,255,0.82);*/
+	background: #fff;
+    box-shadow: 0 -0.026667rem 0 0 #F1F1F1;
+}
+.commonBottomBtnContainer{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}
+.commonBottomBtn{
+	flex: 1;
+	font-size: 10px;
+	color: #999;
+	height: 100%;
+}
+.commonBottomBtnWraper{
+	height: 100%;
+    text-align: center;
+    font-size: 0;
+}
+span.commonBottomBtnIconWraper {
+    display: inline-block;
+    width: 100%;
+    height: 0.8rem;
+    background: url(../img/jiansheyinhang@2x.png) no-repeat center 0.186667rem;
+    background-size: 0.586667rem 0.586667rem;
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+   span.commonBottomBtnIconWraper{
+       background: url("../img/jiansheyinhang@3x.png") no-repeat center 0.186667rem;
+       background-size: 0.586667rem 0.586667rem;
+    }
+}
+span.baojia{
+	background: url(../img/baojiabuxuan@2x.png) no-repeat center 0.186667rem;
+    background-size: 0.586667rem 0.586667rem;
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+  span.baojia{
+       background: url("../img/baojiabuxuan@3x.png") no-repeat center 0.186667rem;
+       background-size: 0.586667rem 0.586667rem;
+    }
+}
+span.chengzuren{
+	background: url(../img/chengzurenbuxuan@2x.png) no-repeat center 0.186667rem;
+    background-size: 0.586667rem 0.586667rem;	
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+  span.chengzuren{
+       background: url("../img/chengzurenbuxuan@3x.png") no-repeat center 0.186667rem;
+       background-size: 0.586667rem 0.586667rem;
+    }
+}
+span.ziliao{
+	background: url(../img/ziliaobuxuan@2x.png) no-repeat center 0.186667rem;
+    background-size: 0.586667rem 0.586667rem;	
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+  span.chengzuren{
+       background: url("../img/ziliaobuxuan@3x.png") no-repeat center 0.186667rem;
+       background-size: 0.586667rem 0.586667rem;
+    }
+}
+span.commonBottomText {
+    font-size: 10px;
+    line-height: 0.373333rem;
+    margin-top: 0.08rem;
+    display: inline-block;
+}
+span.activebaojia{
+	background: url(../img/baojiaxuanzhong@2x.png) no-repeat center 0.186667rem;
+    background-size: 0.586667rem 0.586667rem;	
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+ span.activebaojia{
+       background: url("../img/baojiaxuanzhong@3x.png") no-repeat center 0.186667rem;
+       background-size: 0.586667rem 0.586667rem;
+    }
+}
+span.baojiaText{
+	color: #2DBBFA;
+}
+span.activechengzuren{
+	background: url(../img/chengzurenxuanzhong@2x.png) no-repeat center 0.186667rem;
+    background-size: 0.586667rem 0.586667rem;	
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+ span.activechengzuren{
+       background: url("../img/chengzurenxuanzhong@3x.png") no-repeat center 0.186667rem;
+       background-size: 0.586667rem 0.586667rem;
+    }
+}
+span.chengzurenText{
+	color: #2DBBFA;
+}
+span.activeziliao{
+	background: url(../img/ziliaoxuanzhong@2x.png) no-repeat center 0.186667rem;
+    background-size: 0.586667rem 0.586667rem;
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+ span.activeziliao{
+       background: url("../img/ziliaoxuanzhong@3x.png") no-repeat center 0.186667rem;
+       background-size: 0.586667rem 0.586667rem;
+    }
+}
+span.ziliaoText{
+	color: #2DBBFA;
+}
+/*录入附件的一些样式，弹出层，可选相机和相册*/
+.openCamaraOrAlbumWraper{
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 99;
+	height: 100%;
+	width: 100%;
+	background: rgba(0,0,0,0.70);
+}
+.closeTotastHandler{
+	height: 100%;
+	width: 100%;
+}
+.operationContainer{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background-color: #EEE;
+}
+.operationBtnContainer{
+	height: 1.386667rem;
+	width: 100%;
+	font-size: 16px;
+	color: #00A0E8;
+	line-height: 1.386667rem;
+	border-bottom: 0.026667rem solid #F7F7F7;
+	box-sizing: border-box;
+	background-color: #fff;
+	text-align: center;
+}
+.operationBtnContainer:last-child{
+	border-bottom: none;
+}
+.operationListWraper{
+	width: 100%;
+	margin-bottom: 0.133333rem;
+}
+.operationCancelBtn{
+	border: none;
+	outline: none;
+	height: 1.386667rem;
+	width: 100%;
+	background-color: #fff;
+	font-size: 16px;
+	color: #999;
+	line-height: 1.386667rem;
+}
+/*支持上传多个图片的样式*/
+div.userDataMesgMuchImg{
+	background: #fff;
+	width: 100%;
+	padding-left: 0.4rem;
+	padding-top: 0.666667rem;
+	font-size: 0;
+}
+div.showMuchPhoto,div.addMuchPhoto{
+	display: inline-block;
+	margin-right: 0.533333rem;
+	margin-bottom: 0.4rem;
+	vertical-align: top;
+}
+.userDataMesgMuchImgDelete{
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: blue;
+	height: 0.693333rem;
+	width: 0.693333rem;
+}

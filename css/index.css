@@ -1,0 +1,187 @@
+/*头部的一些样式*/
+.updateImgWraper{
+    height: 100%;
+    width: 100%;
+    background: #fff;
+}
+header {
+    height: 1.173333rem;
+    width: 100%;
+    text-align: center;
+    line-height: 1.173333rem;
+    box-sizing: border-box;
+    border-bottom: 0.026667rem solid #2DBBFA;
+    font-size: 14px;
+    color: #2DBBFA;
+    position: fixed;
+    background: #fff;
+}
+span.turnBackArrow {
+    display: inline-block;
+    width: 1.333333rem;
+    height: 100%;
+    line-height: 1.146667rem;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: url("../img/back2x.png") no-repeat center;
+    background-size: 0.293333rem;
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+    span.turnBackArrow{
+        background: url("../img/back@3x.png") no-repeat center;
+        background-size: 0.293333rem;
+    }
+}
+h3.header-title {
+    padding: 0;
+    margin: 0;
+    font-size: 17px;
+}
+span.confirmSpanBlock {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1.333333rem;
+    font-size: 15px;
+    text-align: center;
+}
+/*上传图片内容的样式*/
+.updateImgWraper {
+    background: #fff;
+}
+.mesgContainer {
+    position: relative;
+    font-size: 15px;
+    color: #666;
+    padding-left: 0.4rem;
+    padding-top: 1.173333rem;
+}
+input[type="file"] {
+    width: 0;
+    height: 0;
+    top: 0;
+    left: 0;
+    border: none;
+    outline: none;
+    display: none;
+}
+.confirmBtn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+button.confirmUpload {
+    border: none;
+    outline: none;
+    height: 1.333333rem;
+    width: 100%;
+    display: block;
+    background-color: #2DBBFA;
+    color: #fff;
+    font-size: 16px;
+}
+/*图片上传失败时弹出层的样式*/
+.imgtotast{
+    position: absolute;
+    top: 0;
+    background-color: rgba(94,95,95,.6);
+    height: 100%;
+    width: 100%;
+    z-index: 999;
+}
+.totast-container{
+    width: 5.333333rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    background-color: #FAFAFC;
+    z-index: 5;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 0.133333rem;
+    padding-top: 0.533333rem;
+}
+.totast-container-right{
+    display: inline-block;
+    height: 0.986667rem;
+    width: 100%;
+    line-height: 0.986667rem;
+    margin-top: 0.8rem;
+    border-top: 0.026667rem solid #2DBBFA;
+    color: #2DBBFA;
+}
+/*用户信息页*/
+.userMesgWraper {
+    background: #fff;
+    padding-top: 1.173333rem;
+}
+.userImgWraper {
+    padding: 0.4rem;
+}
+.userUploadImgContainer {
+    height: 5.493333rem;
+    width: 100%;
+    box-sizing: border-box;
+    border: 0.026667rem dotted #D0D0D0;
+}
+.userMesgContent {
+    padding: 0 0.4rem;
+}
+li.userMesgContentItem {
+    height: 1.333333rem;
+    /* display: flex; */
+    font-size: 15px;
+    line-height: 1.333333rem;
+}
+span.userMesgContentItemText {
+    display: inline-block;
+    color: #666;
+}
+input.userMesgContentItemVal {
+    border: none;
+    outline: none;
+    width: 75%;
+    float: right;
+    height: 100%;
+    color: #333;
+    font-size: 15px;
+}
+li.userMesgContentItem.userMesgContentItemPosition {
+    height: 2.0rem;
+    line-height: 2.0rem;
+}
+textarea.userMesgContentPositionVal {
+    width: 75%;
+    height: 100%;
+    float: right;
+    border: none;
+    outline: none;
+    font-size: 0.4rem;
+    padding: 0.4rem 0;
+    color: #333;
+    resize: none;
+}
+li.selectListItem {
+    width: 100%;
+    height: 1.333333rem;
+    line-height: 1.333333rem;
+    border-bottom: 0.026667rem solid #F7F7F7;
+    position: relative;
+}
+li.selectListItem:last-child{
+    border-bottom: none;
+}
+span.selectListItemText {
+    display: inline-block;
+}
+span.selectListItemIconContainer {
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    float: right;
+}

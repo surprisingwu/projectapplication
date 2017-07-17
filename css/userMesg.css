@@ -1,0 +1,303 @@
+/*头部的样式*/
+header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 1.173333rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0;
+    box-sizing: border-box;
+    border-bottom: 0.026667rem solid #2DBBFA;
+    background: #fff;
+    padding: 0 0.4rem;
+}
+i.turnBackLastPage {
+    width: 1.866667rem;
+    height: 100%;
+    background: url(../img/back@2x.png) no-repeat left center;
+    background-size: 0.266667rem 0.533333rem;
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+    i.turnBackLastPage{
+       background: url("../img/back@3x.png") no-repeat left center; 
+        background-size: 0.266667rem 0.533333rem;
+    }
+}
+h3{
+	margin-top: 0;
+	margin-bottom: 0;
+	font-size: 17px;
+	color: #2DBBFA;
+}
+.headerOperation{
+	width: 1.866667rem;
+	height: 1.173333rem;
+	text-align: right;
+	font-size: 15px;
+	line-height: 1.173333rem;
+	color: #2DBBFA;
+}
+
+/*中间内容部分*/
+main {
+    padding-top: 1.173333rem;
+    width: 100%;
+    font-size: 0;
+    background: #fff;
+    padding-bottom: 1.333333rem;
+}
+/*个人档案的样式*/
+.userMesgShow{
+	height: 5.333333rem;
+	width: 100%;
+}
+.userMesgShowHead{
+	padding-left: 0.4rem;
+	padding-right: 0.4rem;
+	margin-top: 0.4rem;
+	height: 0.693333rem;
+	font-size: 0;
+	line-height: 0.693333rem;
+	background: url("../img/blueblock@2x.png") no-repeat left center;
+	background-size: 0.08rem 0.693333rem; 
+	display: flex;
+	justify-content: center;
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+   .userMesgShowHead{
+       background: url("../img/blueblock@3x.png") no-repeat left center;
+       background-size: 0.08rem 0.693333rem; 
+    }
+}
+.rightArrowWraper{
+    flex:0 0 0.266667rem;
+    height: 100%;
+    background: url(../img/rightarrow@2x.png) no-repeat center;
+    background-size: 0.213333rem 0.4rem;
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+   .rightArrowWraper{
+       background: url("../img/rightarrow@3x.png") no-repeat center;
+       background-size: 0.213333rem 0.4rem;
+    }
+}
+.userMesgShowHeadTittle{
+	font-size: 15px;
+	font-weight: 600;
+	color: #333;
+	flex: 1;
+}
+.userMesgShowMiddle {
+    margin-top: 0.213333rem;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+}
+.commonUserMesg {
+    font-size: 13px;
+    color: #666;
+    display: flex;
+}	
+/*---------------这个地方的适配有点问题，到时候用ipone5看下---------*/
+span.commonUserMesgText {
+/*这个地方的适配有点问题，用rem时，字装不下，浏览器默认最小的字体是14px，估计和这个有关系*/
+    flex: 0 0 65px;
+    text-align: right;
+    line-height: 0.666667rem;
+}
+/*---------------这个地方的适配有点问题，到时候用ipone5看下---------*/
+span.commonUserMesgVal {
+	padding-left: 0.266667rem;
+    flex: 1;
+    line-height: 0.666667rem;
+}
+.userMesgBottom{
+	padding: 0 0.4rem;
+	font-size: 13px;
+	color: #666;
+}
+/*联系人的一些信息*/
+div.commonMesgNav{
+	height: 0.933333rem;
+	background-color:#F7F7F7 !important;
+	padding: 0 0.4rem;
+	width: 100%;
+	background: url("../img/blueblock@2x.png") no-repeat left center;
+	background-size: 0.08rem 0.533333rem;
+	display: flex;
+	align-items: center;
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+   div.commonMesgNav{
+       background: url("../img/blueblock@3x.png") no-repeat left center;
+       background-size: 0.08rem 0.533333rem;
+    }
+}
+.commonMesgNavText{
+	font-size: 15px;
+	color: #999;
+}
+.commonMesgNavAdd{
+	flex: 1;
+	font-size: 14px;
+	color: #31B3EF ;
+	text-align: right;
+}
+li.commonListItem{
+	height: 1.866667rem;
+	width: 100%;
+	padding: 0.24rem 0.4rem 0 0.4rem;
+	border-bottom: 0.026667rem solid #F7F7F7; 
+}
+li.commonListItem:last-child{
+	border-bottom: none;
+}
+span.commonListItemText{
+	color: #333;
+	font-size: 15px;
+	line-height: 0.48rem;
+}
+i.commonListItemRightArrow{
+	height: 0.4rem;
+	width: 100%;
+	display: block;
+	padding-right: 0.4rem;
+	background: url("../img/rightarrow@2x.png") no-repeat right center;
+	background-size: 0.213333rem 0.4rem;
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+   i.commonListItemRightArrow{
+       background: url("../img/rightarrow@3x.png") no-repeat right center;
+       background-size: 0.213333rem 0.4rem;
+    }
+}
+span.commonListItemVal{
+	font-size: 15px;
+	color: #999;
+	line-height: 0.48rem;
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	display: inline-block;
+	width: 7.653333rem;
+}
+
+/*底部按钮的一些样式*/
+footer{
+	height: 1.333333rem;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	font-size: 0;
+	width: 100%;
+	/*background: rgba(255,255,255,0.82);*/
+	background: #fff;
+    box-shadow: 0 -0.026667rem 0 0 #F1F1F1;
+}
+.commonBottomBtnContainer{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}
+.commonBottomBtn{
+	flex: 1;
+	font-size: 10px;
+	color: #999;
+	height: 100%;
+}
+.commonBottomBtnWraper{
+	height: 100%;
+    text-align: center;
+    font-size: 0;
+}
+span.commonBottomBtnIconWraper {
+    display: inline-block;
+    width: 100%;
+    height: 0.8rem;
+    background: url(../img/jiansheyinhang@2x.png) no-repeat center 0.186667rem;
+    background-size: 0.586667rem 0.586667rem;
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+   span.commonBottomBtnIconWraper{
+       background: url("../img/jiansheyinhang@3x.png") no-repeat center 0.186667rem;
+       background-size: 0.586667rem 0.586667rem;
+    }
+}
+span.baojia{
+	background: url(../img/baojiabuxuan@2x.png) no-repeat center 0.186667rem;
+    background-size: 0.586667rem 0.586667rem;
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+  span.baojia{
+       background: url("../img/baojiabuxuan@3x.png") no-repeat center 0.186667rem;
+       background-size: 0.586667rem 0.586667rem;
+    }
+}
+span.chengzuren{
+	background: url(../img/chengzurenbuxuan@2x.png) no-repeat center 0.186667rem;
+    background-size: 0.586667rem 0.586667rem;	
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+  span.chengzuren{
+       background: url("../img/chengzurenbuxuan@3x.png") no-repeat center 0.186667rem;
+       background-size: 0.586667rem 0.586667rem;
+    }
+}
+span.ziliao{
+	background: url(../img/ziliaobuxuan@2x.png) no-repeat center 0.186667rem;
+    background-size: 0.586667rem 0.586667rem;	
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+  span.chengzuren{
+       background: url("../img/ziliaobuxuan@3x.png") no-repeat center 0.186667rem;
+       background-size: 0.586667rem 0.586667rem;
+    }
+}
+span.commonBottomText {
+    font-size: 10px;
+    line-height: 0.373333rem;
+    margin-top: 0.08rem;
+    display: inline-block;
+}
+span.activebaojia{
+	background: url(../img/baojiaxuanzhong@2x.png) no-repeat center 0.186667rem;
+    background-size: 0.586667rem 0.586667rem;	
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+ span.activebaojia{
+       background: url("../img/baojiaxuanzhong@3x.png") no-repeat center 0.186667rem;
+       background-size: 0.586667rem 0.586667rem;
+    }
+}
+span.baojiaText{
+	color: #2DBBFA;
+}
+span.activechengzuren{
+	background: url(../img/chengzurenxuanzhong@2x.png) no-repeat center 0.186667rem;
+    background-size: 0.586667rem 0.586667rem;	
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+ span.activechengzuren{
+       background: url("../img/chengzurenxuanzhong@3x.png") no-repeat center 0.186667rem;
+       background-size: 0.586667rem 0.586667rem;
+    }
+}
+span.chengzurenText{
+	color: #2DBBFA;
+}
+span.activeziliao{
+	background: url(../img/ziliaoxuanzhong@2x.png) no-repeat center 0.186667rem;
+    background-size: 0.586667rem 0.586667rem;
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+ span.activeziliao{
+       background: url("../img/ziliaoxuanzhong@3x.png") no-repeat center 0.186667rem;
+       background-size: 0.586667rem 0.586667rem;
+    }
+}
+span.ziliaoText{
+	color: #2DBBFA;
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/font-icons.css">
+    <link rel="stylesheet" href="../css/iuapmobile.um.css">
+    <link rel="stylesheet" href="../css/businessCard.css">
+    <script src="../js/summer.js" ></script>
+    <script src="../js/jquery.min.js" ></script>
+    <script src="../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+    <script src="../js/appsettings.js"></script>
+    <script src="../js/adaptive.js"></script>
+    <script src="../js/cvi_busy_lib.js"></script>
+    <script src="../js/addBankCard.js"></script>
+</head>
+<body>
+<div class="wraper">
+    <header>
+        <i class="turnBackLastPage"></i>
+        <h3 class="headerTitle">新增银行账户</h3>
+        <span class="headerOperation">保存</span>
+    </header>
+    <main>
+        <div class="photoWraper">
+            <div class="photoContainer addBankCardIcon">
+
+            </div>
+        </div>
+        <div class="userMesgWraper">
+            <form  id="userMesgWraper">
+                <ul class="userMesgWraperList">
+                    <li class="userMesgWraperListItem">
+                        <label for="accountType" class="userMesgWraperListItemText">
+                            帐号类型
+                        </label>
+                        <input type="text" class="userMesgWraperListItemVal" name="account_type"  id="accountType" placeholder="请输入/扫描">
+                    </li>
+                    <li class="userMesgWraperListItem">
+                        <label for="cardUser" class="userMesgWraperListItemText">
+                            持卡人
+                        </label>
+                        <input type="text" class="userMesgWraperListItemVal" name="cardholder" id="cardUser" placeholder="请输入/扫描">
+                    </li>
+                    <li class="userMesgWraperListItem">
+                        <label for="bankCardNum" class="userMesgWraperListItemText">
+                            银行帐号
+                        </label>
+                        <input type="number" class="userMesgWraperListItemVal" name="account" id="bankCardNum" placeholder="请输入/扫描">
+                    </li>
+                    <li class="userMesgWraperListItem">
+                        <label for="totalBankBig" class="userMesgWraperListItemText">
+                            所属总行
+                        </label>
+                        <input type="text" class="userMesgWraperListItemVal" name="owned" id="totalBankBig" placeholder="请输入/扫描">
+                    </li>
+                    <li class="userMesgWraperListItem">
+                        <label for="driverCardBank" class="userMesgWraperListItemText">
+                            开户行全称
+                        </label>
+                        <input type="text" class="userMesgWraperListItemVal" name="fullname" id="driverCardBank" placeholder="请输入/扫描">
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </main>
+    <footer>
+    </footer>
+</div>
+<div class="takePhotosTypeWraper" style="display: none">
+    <div class="closeTakePhotosTypeWraper"></div>
+    <div class="selectTakePhotosTypeContainer">
+        <div class="selectTakePhotosTypeItem" id="openCamaraDiv">
+            <span>拍摄</span>
+        </div>
+        <div class="selectTakePhotosTypeItem borderBottomNone" id="openAlbumDiv">
+            <span>从手机相册选择</span>
+        </div>
+        <button class="selectTakePhotosTypeCancelBtn">取消</button>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/font-icons.css">
+    <link rel="stylesheet" href="../css/iuapmobile.um.css">
+    <link rel="stylesheet" href="../css/businessCard.css">
+    <script src="../js/summer.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/Frameworks/iuapmobile.frameworks.ui.js"></script>
+    <script src="../js/cvi_busy_lib.js"></script>
+    <script src="../js/appsettings.js"></script>
+    <script src="../js/adaptive.js"></script>
+    <script src="../js/businessCard.js"></script>
+</head>
+<body>
+<div class="wraper">
+    <header>
+        <i class="turnBackLastPage"></i>
+        <h3 class="headerTitle">联系方式</h3>
+        <span class="headerOperation" style="opacity: 0">保存</span>
+    </header>
+    <main>
+        <div class="userMesgWraper">
+            <form id="userMesgWraper">
+                <ul class="userMesgWraperList" id="renderContainer">
+                </ul>
+            </form>
+        </div>
+    </main>
+    <footer>
+    </footer>
+</div>
+
+</body>
+<script>
+    document.addEventListener("deviceready", function () {
+        document.addEventListener("backbutton", function () {
+            try {
+                localStorage.removeItem("navIndex");
+            } catch (e) {
+            }
+            window.location.href = "userMesg.html";
+        }, false);
+    }, false);
+    summerready = function () {
+        $(".turnBackLastPage").turnBackLastPage("userMesg.html");
+        var data = JSON.parse(localStorage.getItem("data"));
+        var dataArr = [
+            {name:"手机号",value:data.mobile||"空"},
+            {name:"电子邮箱",value:data.email||"空"},
+            {name:"微信号",value:data.wechat||"空"},
+            {name:"qq号",value:data.connect_qq||"空"},
+            {name:"通讯地址",value:data.address||"空"},
+            {name:"邮政编码",value:data.msgzipcode||"空"}
+        ]
+        renderIndefienceDetail(dataArr);
+    }
+    function renderIndefienceDetail(dataArr) {
+        var $renderContainer = $("#renderContainer");
+        var htmlStr = "";
+        dataArr.forEach(function (item, index) {
+            if (item.value !== undefined) {
+                htmlStr += '<li class="userMesgWraperListItem"><label  class="userMesgWraperListItemText">' + item.name + '</label><input type="text" class="userMesgWraperListItemVal" value=' + item.value + '  readonly></li>';
+            }
+        })
+        $renderContainer.append(htmlStr);
+    }
+</script>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/font-icons.css">
+    <link rel="stylesheet" href="../css/iuapmobile.um.css">
+    <link rel="stylesheet" href="../css/userMesg.css">
+    <script src="../js/summer.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/Frameworks/iuapmobile.frameworks.ui.js"></script>
+    <script src="../js/cvi_busy_lib.js"></script>
+    <script src="../js/appsettings.js"></script>
+    <script src="../js/adaptive.js"></script>
+    <script src="../js/userMesg.js"></script>
+</head>
+<body>
+<div class="wraper">
+    <header>
+        <i class="turnBackLastPage"></i>
+        <h3 class="headerTitle">承租人信息</h3>
+        <span class="headerOperation" >芝麻信用</span>
+    </header>
+    <main>
+        <div class="userMesgShow">
+            <div class="userMesgShowHead">
+                <span class="userMesgShowHeadTittle">
+                    个人档案
+                </span>
+                <i class="rightArrowWraper"></i>
+            </div>
+            <div class="userMesgShowMiddle">
+                <div class="commonUserMesg">
+                    <span class="commonUserMesgText">姓名：</span>
+                    <span class="commonUserMesgVal" id="userName"></span>
+                </div>
+                <div class="commonUserMesg">
+                    <span class="commonUserMesgText">性别：</span>
+                    <span class="commonUserMesgVal" id="userSex"></span>
+                </div>
+                <div class="commonUserMesg">
+                    <span class="commonUserMesgText">民族：</span>
+                    <span class="commonUserMesgVal" id="userNation"></span>
+                </div>
+            </div>
+            <div class="userMesgBottom">
+                <div class="commonUserMesg">
+                    <span class="commonUserMesgText">出生日期：</span>
+                    <span class="commonUserMesgVal" id="userBirthDate"></span>
+                </div>
+                <div class="commonUserMesg">
+                    <span class="commonUserMesgText">证件类型：</span>
+                    <span class="commonUserMesgVal" id="userIndefienceCardType"></span>
+                </div>
+                <div class="commonUserMesg">
+                    <span class="commonUserMesgText">证件号码：</span>
+                    <span class="commonUserMesgVal" id="userIndefienceCardNum"></span>
+                </div>
+            </div>
+        </div>
+        <div class="commonMesgContainer">
+            <div class="wifeMesgContainer commonMesgNav">
+                <span class="commonMesgNavText">配偶信息</span>
+                <span class="commonMesgNavAdd">新增</span>
+            </div>
+            <ul class="commonListContainer" id="wifeMesg">
+            </ul>
+            <div class="connectWay commonMesgNav">
+                <span class="commonMesgNavText">联系方式</span>
+                <span class="commonMesgNavAdd">新增</span>
+            </div>
+            <ul class="commonListContainer" id="contactWay">
+            </ul>
+            <div class="connectPeople commonMesgNav">
+                <span class="commonMesgNavText">联系人</span>
+                <span class="commonMesgNavAdd">新增</span>
+            </div>
+            <ul class="commonListContainer" id="connectPeople">
+            </ul>
+            <div class="bankAccount commonMesgNav">
+                <span class="commonMesgNavText">银行账户</span>
+                <span class="commonMesgNavAdd">新增</span>
+            </div>
+            <ul class="commonListContainer" id="bankCardAccount">
+            </ul>
+            <div class="bondsMan commonMesgNav">
+                <span class="commonMesgNavText">担保人</span>
+                <span class="commonMesgNavAdd">新增</span>
+            </div>
+            <ul class="commonListContainer" id="bondsmanMesg">
+            </ul>
+            <div class="wifeMesgContainer commonMesgNav" style="display: none">
+                <span class="commonMesgNavText">共承人</span>
+                <span class="commonMesgNavAdd">新增</span>
+            </div>
+            <ul class="commonListContainer" style="display: none">
+                <li class="commonListItem">
+                    <span class="commonListItemText">
+                        韩霓
+                    </span>
+                    <i class="commonListItemRightArrow"></i>
+                    <span class="commonListItemVal">18810893112</span>
+                </li>
+            </ul>
+        </div>
+
+    </main>
+    <footer>
+        <div class="commonBottomBtnContainer">
+            <div class="commonBottomBtn" id="baojia">
+                <div class="commonBottomBtnWraper">
+                    <span class="commonBottomBtnIconWraper baojia"></span>
+                    <span class="commonBottomText" id="baojiaText">报价</span>
+                </div>
+            </div>
+            <div class="commonBottomBtn" id="chengzuren">
+                <div class="commonBottomBtnWraper">
+                    <span class="commonBottomBtnIconWraper chengzuren"></span>
+                    <span class="commonBottomText" id="chengzurenText">承租人</span>
+                </div>
+            </div>
+            <div class="commonBottomBtn" id="ziliao">
+                <div class="commonBottomBtnWraper">
+                    <span class="commonBottomBtnIconWraper ziliao"></span>
+                    <span class="commonBottomText" id="ziliaoText">资料</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

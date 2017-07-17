@@ -1,0 +1,373 @@
+/*头部的一些信息*/
+header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 1.173333rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0;
+    box-sizing: border-box;
+    border-bottom: 0.026667rem solid #2DBBFA;
+    background: #fff;
+    padding: 0 0.4rem;
+}
+i.turnBackLastPage {
+    width: 1.866667rem;
+    height: 100%;
+    background: url(../img/back@2x.png) no-repeat left center;
+    background-size: 0.266667rem 0.533333rem;
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+    i.turnBackLastPage{
+       background: url("../img/back@3x.png") no-repeat left center; 
+        background-size: 0.266667rem 0.533333rem;
+    }
+}
+h3{
+	margin-top: 0;
+	margin-bottom: 0;
+	font-size: 17px;
+	color: #2DBBFA;
+}
+.headerOperation{
+	width: 1.866667rem;
+	height: 1.173333rem;
+	text-align: right;
+	font-size: 15px;
+	line-height: 1.173333rem;
+	color: #2DBBFA;
+}
+/*内容部分*/
+main {
+    padding-top: 1.173333rem;
+    width: 100%;
+    font-size: 0;
+    background: #fff;
+}
+.photoWraper {
+    padding: 0.666667rem 0.4rem;
+}
+.photoContainer {
+    height: 5.333333rem;
+    background: url("../img/indefiencecardicon@2x.png") no-repeat center;
+    background-size: contain; 
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+    .photoContainer{
+       background: url("../img/indefiencecardicon@3x.png") no-repeat center;
+       background-size: contain; 
+    }
+}
+ul.userMesgWraperList {
+    padding-left: 0.4rem;
+}
+li.userMesgWraperListItem {
+    font-size: 0;
+    display: flex;
+    box-sizing: border-box;
+    border-bottom: 0.026667rem solid #F7F7F7;
+    padding-right: 0.8rem;
+    height: 1.333333rem;
+    align-items: center;
+}
+label.userMesgWraperListItemText {
+    font-size: 15px;
+    color: #666;
+}
+input.userMesgWraperListItemVal,span.userMesgWraperListItemVal {
+    border: none;
+    outline: none;
+    text-align: right;
+    height: 100%;
+    flex: 1;
+    color: #333;
+    font-size: 15px;
+}
+span#maritalStatus {
+    font-size: 15px;
+    line-height: 1.306667rem;
+    color: #CCC;
+}
+input::-webkit-input-placeholder{
+	color: #CCC;
+	font-size: 15px;
+}
+input::input-placeholder{
+	color: #CCC;
+}
+textarea#detailAdressContainerVal {
+    height: 70px;
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    font-size: 15px;
+	padding: 0.4rem 0.8rem 0.4rem 0.4rem;
+}
+textarea::-webkit-textarea-placeholder{
+	color: #CCC;
+}
+textarea::placeholder{
+	color: #CCC;
+}
+/*身份证识别的一些信息*/
+li.specialUserMesgListItem {
+    height: 4.533333rem;
+    width: 100%;
+}
+input#userAddress{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+span.specialUserMesgListItemText {
+    font-size: 15px;
+    display: block;
+    height: 1.333333rem;
+    line-height: 1.333333rem;
+    color: #666;
+}
+span.specialUserMesgListItemIcon {
+    display: block;
+    width: 2.4rem;
+    height: 2.4rem;
+    background: url(../img/caramahehe.png) no-repeat center;
+    background-size: contain;
+}
+/*选择婚姻类型的样式*/
+.selectMarriageType,.takePhotosTypeWraper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+}
+.closeTotastContainer,.closeTakePhotosTypeWraper {
+    height: 100%;
+    width: 100%;
+}
+.selectMarriageTypeContainer,.selectTakePhotosTypeContainer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #ccc;
+    font-size: 0;
+}
+.selectMarriageTypeItem,.selectTakePhotosTypeItem {
+    height: 1.386667rem;
+    width: 100%;
+    font-size: 16px;
+    border-bottom: 0.026667rem solid #EEE;
+    text-align: center;
+    line-height: 1.386667rem;
+    color: #00A0E8;
+    background-color: #fff;
+}
+.borderBottomNone{
+	border-bottom: none;
+}
+button.selectMarriageTypeCancelBtn,.selectTakePhotosTypeCancelBtn {
+    display: block;
+    height: 1.386667rem;
+    width: 100%;
+    border: none;
+    outline: none;
+    margin-top: 0.16rem;
+    font-size: 16px;
+    color: #00A0E8;
+    background-color: #fff;
+}
+/*弹出层的样式*/
+.totastForbiddenScroll{
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	overflow: hidden;
+}
+/*个人名片页*/
+.businesscardicon{
+    background: url("../img/businesscardicon@2x.png") no-repeat center;
+    background-size: contain; 
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+    .businesscardicon{
+       background: url("../img/businesscardicon@3x.png") no-repeat center;
+       background-size: contain; 
+    }
+}
+/*婚姻状况*/
+input#select1_dummy{
+    border: none;
+    outline: none;
+    text-align: right;
+    height: 100%;
+    flex: 1;
+    color: #333;
+    font-size: 15px;
+    padding-right: 0.4rem;
+}
+input#select2_dummy{
+    border: none;
+    outline: none;
+    text-align: right;
+    height: 100%;
+    flex: 1;
+    color: #333;
+    font-size: 15px;
+    padding-right: 0.4rem;
+}
+input#select3_dummy{
+    border: none;
+    outline: none;
+    text-align: right;
+    height: 100%;
+    flex: 1;
+    color: #333;
+    font-size: 15px;
+    padding-right: 0.4rem;
+}
+input#select4_dummy{
+    border: none;
+    outline: none;
+    text-align: right;
+    height: 100%;
+    flex: 1;
+    color: #333;
+    font-size: 15px;
+    padding-right: 0.4rem;
+}
+input[disabled]{
+    background: #fff;
+}
+/*重置滚动选择器的一些样式*/
+.um-picker.dwb.dwb1.dwb-e {
+    color: #999;
+    font-weight: normal;
+    font-size: 15px;
+}
+.um-picker.dwb.dwb0.dwb-e {
+    color: #00A0E8;
+    font-weight: normal;
+    font-size: 15px;
+}
+.mbsc-ios7 .dwwol{
+    margin: 0;
+}
+.mbsc-ios7 .dwbc{
+    background: #fff;
+}
+.mbsc-ios7 .dw-li{
+    font-size: 20px;
+}
+/*新增联系人的界面*/
+li.conectPeopleItem{
+    padding-right: 0.4rem;
+}
+li.specialConectPeopleItem::after{
+    content: "";
+    display: inline-block;
+    width: 0.4rem;
+    height: 100%;
+    background: url(../img/rightarrow@2x.png) no-repeat center;
+    background-size: 0.213333rem 0.4rem;
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+    li.specialConectPeopleItem::after{
+       background: url("../img/rightarrow@3x.png") no-repeat center;
+       background-size: 0.213333rem 0.4rem;
+    }
+}
+/*银行卡账户的样式*/
+.bankCardListItem{
+    background: #fff;
+    height: 3.2rem;
+    width: 100%;
+    font-size: 0;
+    padding-left: 0.613333rem;
+    padding-right: 0.4rem;
+    margin-bottom: 0.266667rem;
+}
+.bankCardListItem:last-child{
+    margin-bottom: 0;
+}
+.headSomeMesg{
+    display: flex;
+    padding-top: 0.4rem;
+}
+.iconWraper{
+    flex: 0 0 0.933333rem;
+    background: url("../img/jiansheyinhang@2x.png") no-repeat center;
+    background-size: contain;
+}
+.headSomeMesgDetail {
+    margin-left: 0.4rem;
+}
+span.bankName {
+    font-size: 17px;
+    color: #666;
+    display: block;
+}
+span.bankCardType{
+    font-size: 13px;
+    color: #666;
+}
+.bankCardNum {
+    font-size: 15px;
+    color: #333;
+    text-align: right;
+    margin-top: 0.533333rem;
+}
+.backgroundNone{
+    background: none;
+}
+/*新增银行账户*/
+.addBankCardIcon{
+    background: url("../img/bankcardicon@2x.png") no-repeat center;
+    background-size: contain; 
+}
+@media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+    .addBankCardIcon{
+       background: url("../img/bankcardicon@3x.png") no-repeat center;
+       background-size: contain; 
+    }
+}
+/*联系人详情页*/
+li.connectPeopleDetailItem{
+    height: 3.733333rem;
+    width: 100%;
+    padding: 0.266667rem 0.4rem 0;
+    margin-bottom: 0.266667rem;
+    background: #fff;
+}
+li.connectPeopleDetailItem:last-child{
+    margin-bottom: 0;
+}
+.connectPeopleDetailName {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 0.666667rem;
+    margin-bottom: 0.586667rem;
+}
+span.connectPeopleDetailNameVal {
+    color: #333;
+}
+.connectPeopleDetaiCommonWraper {
+    display: flex;
+    font-size: 15px;
+    margin-bottom: 0.586667rem;
+}
+span.connectPeopleDetailCommonText {
+    color: #666;
+}
+span.connectPeopleDetailCommonVal {
+    flex: 1;
+    text-align: right;
+    color: #333;
+}

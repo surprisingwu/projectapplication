@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/font-icons.css">
+    <link rel="stylesheet" href="../css/iuapmobile.um.css">
+    <link rel="stylesheet" href="../css/iscroll.css">
+    <link rel="stylesheet" href="../css/businessCard.css">
+    <script src="../js/summer.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/Frameworks/iuapmobile.frameworks.ui.js"></script>
+    <script src="../js/cvi_busy_lib.js"></script>
+    <script src="../js/appsettings.js"></script>
+    <script src="../js/adaptive.js"></script>
+    <script src="../js/iscroll.js"></script>
+</head>
+<body>
+<div class="wraper">
+    <header>
+        <i class="turnBackLastPage"></i>
+        <h3 class="headerTitle">个人档案</h3>
+        <span class="headerOperation" style="opacity: 0">下一步</span>
+    </header>
+    <main>
+        <div class="photoWraper">
+            <div class="photoContainer">
+            </div>
+        </div>
+        <div class="userMesgWraper">
+            <form id="userMesgWraper">
+                <ul class="userMesgWraperList" id="renderContainer">
+                    <li class="specialUserMesgListItem">
+                        <span class="specialUserMesgListItemText">
+                            日常半身照
+                        </span>
+                        <span class="specialUserMesgListItemIcon"></span>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </main>
+    <footer>
+    </footer>
+</div>
+<div class="selectMarriageType" style="display: none">
+    <div class="closeTotastContainer"></div>
+    <div class="selectMarriageTypeContainer">
+        <div class="selectMarriageTypeItem">
+            <span>未婚</span>
+        </div>
+        <div class="selectMarriageTypeItem borderBottomNone">
+            <span>已婚</span>
+        </div>
+        <button class="selectMarriageTypeCancelBtn">取消</button>
+    </div>
+</div>
+</body>
+<script>
+    document.addEventListener("deviceready", function () {
+        document.addEventListener("backbutton", function () {
+            try {
+                localStorage.removeItem("navIndex");
+            } catch (e) {
+            }
+            window.location.href = "userMesg.html";
+        }, false);
+    }, false);
+    summerready = function () {
+        //获取数据，然后进行渲染
+        $(".turnBackLastPage").turnBackLastPage("userMesg.html");
+        var $photoContainer = $(".photoContainer");
+        var $specialUserMesgListItemIcon = $(".specialUserMesgListItemIcon");
+        var data = JSON.parse(localStorage.getItem("data"));
+        var id_img = data.id_img;
+        var upbody_img = data.upbody_img;
+        var marriageVal =  data.marriage;
+        var document_typeVal = data.document_type;
+        var sexVal = data.sex;
+        var dateFat = new Date(Number(data.birthday)).Format("yyyy-MM-dd");
+        function returnVal(obj,numStr) {
+            var returnVal = "";
+            for (var key in obj) {
+                if (obj[key] === numStr){
+                    returnVal = key
+                }
+            }
+            return returnVal;
+        }
+        var dataArr = [
+            {
+                name: "姓名",
+                value: data.name,
+            },
+            {
+                name: "性别",
+                value: returnVal(selectTypeObj.sexObj,sexVal),
+            },
+            {
+                name: "民族",
+                value: data.nation,
+            },
+            {
+                name: "出生日期",
+                value: dateFat,
+            },
+            {
+                name: "证件类型",
+                value: returnVal(selectTypeObj.cardTypeObj,document_typeVal),
+            },
+            {
+                name: "证件号码",
+                value: data.document_id,
+            },
+            {
+                name: "婚姻状况",
+                value: returnVal(selectTypeObj.marriageObj,marriageVal),
+            },
+            {
+                name: "住址",
+                value: data.birth_address,
+            }
+        ]
+        //渲染图片
+        $.renderIMG($photoContainer,id_img);
+        if (upbody_img !=="null"&&upbody_img !== ""){
+            $.renderIMG($specialUserMesgListItemIcon,upbody_img);
+        }
+        renderIndefienceDetail(dataArr);
+        function renderIndefienceDetail(dataArr) {
+            var $renderContainer = $("#renderContainer");
+            var htmlStr = "";
+            dataArr.forEach(function (item, index) {
+                if (item.value !== undefined) {
+                    htmlStr += '<li class="userMesgWraperListItem"><label  class="userMesgWraperListItemText">' + item.name + '</label><input type="text" class="userMesgWraperListItemVal" value=' + item.value + '  readonly></li>';
+                }
+            })
+            $renderContainer.prepend(htmlStr);
+        }
+        function returnVal(obj,numStr) {
+            var returnVal = "";
+            for (var key in obj) {
+                if (obj[key] === numStr){
+                    returnVal = key
+                }
+            }
+            return returnVal;
+        }
+    }
+    //根据返回的path，再次发送请求拿到base64
+</script>
+</html>
