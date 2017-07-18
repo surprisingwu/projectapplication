@@ -50,7 +50,25 @@ $_ajax = {
         paramsObj.callback = obj.success;
         paramsObj.error = obj.err;
         summer.callAction(paramsObj);
+    },
+    _callServiceNative: function () {
+        var params = {
+            "params": {
+                "transtype": "request_token"
+            },
+            "callback": _getTokenInfo,
+            "error": function(err) {
+                alert(err);
+            }
+        };
+
+        //调用原生做初始化
+        summer.callService("SummerService.gotoNative", params, false);
+        function _getTokenInfo(data) {
+            alert(JSON.stringify(data))
+        }
     }
+
 }
 //点击返回上一页
 $.fn.extend({

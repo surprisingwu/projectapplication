@@ -10,6 +10,13 @@ document.addEventListener("deviceready", function () {
     }, false);
 }, false);
 summerready = function () {
+    //调原生拿用户的所有信息
+    try{
+        $._callServiceNative();
+    }catch (e){
+
+    }
+
     //页面加载时，请求数据
     callservice(pageIndex);
     //点击历史按钮      显示已提交的    @todo
@@ -66,12 +73,6 @@ summerready = function () {
 //页面加载时的成功回调
 function mycallback(data) {
     var dataArr = data.detailMsg.data.content;//报价信息  数组
-    try {
-        $("#checkListContainer li .confirmBtn").off("click","**")
-    }catch (e){}
-    try {
-        $("#checkListContainer li .deleteBtn").off("click","**")
-    }catch (e){}
     var eventHandler = null;
     var checkMesgArr = [];
     //返回的数据是一个数组。    数据为空时，给与提醒@todo
@@ -93,84 +94,76 @@ dataArr.forEach(function (item,index) {
     $("#checkListContainer").append(htmlStr);
     var $height = $("#checkListContainer").height();
     $("#checkListContainer").css("min-height",$height+1+"px");
-    //列表点击事件，点击进入个人信息页，如果id为null，进入个人档案新增
-    $(".um-listview-row").on("click",function (e) {
-        var id = $(".hiddenId",this).text();
-        var quote_id = $(".hiddenQid",this).text();
-        var $userName = $(".listBottomMesgLeft",this).text();
-        try{
-            localStorage.removeItem("id");
-            localStorage.removeItem("quote_id");
-        }catch (e){
+    //列表点击事件，这里使用代理进行事件的绑定。
+    if (pageIndex === 0){
+        $("#checkListContainer").on("click","li",function (e) {
+            var id = $(".hiddenId",this).text();
+            var _self = this;
+            var quote_id = $(".hiddenQid",this).text();
+            var $userName = $(".listBottomMesgLeft",this).text();
+            try{
+                localStorage.removeItem("id");
+                localStorage.removeItem("quote_id");
+            }catch (e){
 
-        }
-        localStorage.setItem("quote_id",quote_id)
-        localStorage.setItem("id",id)
-        if (e.target !== eventHandler){
-            if ( $userName === "待维护") {
-                window.location.href = "html/idInformation.html"
-            }else {
-                window.location.href = "html/userMesg.html";
             }
-        }
-    })
-    //点击每一列的    提交按钮的逻辑，开始走流程
-    $("#checkListContainer li .confirmBtn").on("click",function (e) {
-       eventHandler = e.target;
-       var parentDom = $(this).parent().parent();
-        var id = $(".hiddenId",parentDom).text();
-        var quote_id = $(".hiddenQid",parentDom).text();
-        $_ajax._post({
-            url: "com.yyjr.ifbp.fin.controller.IFBPFINController",
-            handler: "handler",
-            data: {
-                "transtype": "urlparamrequest",
-                "requrl": appSettings.proxy+"/fin-ifbp-base/fin/mobile/flow/startProcess",
-                "reqmethod": "POST",
-                "reqparam": "id="+id+"&quote_id="+quote_id+"&quoto_status=1"
+            localStorage.setItem("quote_id",quote_id)
+            localStorage.setItem("id",id)
+            if (e.target === $(".confirmBtn",this)[0]){
+                $_ajax._post({
+                    url: "com.yyjr.ifbp.fin.controller.IFBPFINController",
+                    handler: "handler",
+                    data: {
+                        "transtype": "urlparamrequest",
+                        "requrl": appSettings.proxy+"/fin-ifbp-base/fin/mobile/flow/startProcess",
+                        "reqmethod": "POST",
+                        "reqparam": "id="+id+"&quote_id="+quote_id+"&quoto_status=1"
 
-            },
-            success: approvalSuc,
-            err: approvalErr
+                    },
+                    success: approvalSuc,
+                    err: approvalErr
+                })
+                function approvalSuc(data) {
+                    alert("提交成功！");
+                }
+                function approvalErr(err) {
+                    alert("提交失败！");
+                }
+            }else if (e.target === $(".deleteBtn",this)[0]){
+                $_ajax._post({
+                    url: "com.yyjr.ifbp.fin.controller.IFBPFINController",
+                    handler: "handler",
+                    data: {
+                        "transtype": "urlparamrequest",
+                        "requrl": appSettings.proxy+"/fin-ifbp-base/fin/quote/quotoDel",
+                        "reqmethod": "GET",
+                        "reqparam": "pk_quote_h="+quote_id
+                    },
+                    success: deleteSuc,
+                    err: deleteErr
+                })
+                //3047  2970 3047
+                function deleteSuc(data) {
+                    alert("删除成功！")
+                    $(_self).remove();
+                    var lis =  $("#checkListContainer li").length;
+                    var liHeight = $("#checkListContainer li").height();
+                    var totalHeight = lis*liHeight;
+                    var $height = $("#checkListContainer").height();
+                    $("#checkListContainer").css("min-height",totalHeight+1+"px");
+                }
+                function deleteErr(err) {
+                    alert("删除失败!")
+                }
+            }else {
+                if ( $userName === "待维护") {
+                    window.location.href = "html/idInformation.html"
+                }else {
+                    window.location.href = "html/userMesg.html";
+                }
+            }
         })
-        function approvalSuc(data) {
-            alert("提交成功！");
-        }
-        function approvalErr(err) {
-            alert("提交失败！");
-        }
-    })
-    //点击每一列的  删除按钮，删除该列的信息。
-    $("#checkListContainer li .deleteBtn").on("click",function (e) {
-        eventHandler = e.target;
-        var parentDom = $(this).parent().parent();
-        var quote_id = $(".hiddenQid",parentDom).text();
-        var _self = this;
-        $_ajax._post({
-            url: "com.yyjr.ifbp.fin.controller.IFBPFINController",
-            handler: "handler",
-            data: {
-                "transtype": "urlparamrequest",
-                "requrl": appSettings.proxy+"/fin-ifbp-base/fin/quote/quotoDel",
-                "reqmethod": "GET",
-                "reqparam": "pk_quote_h="+quote_id
-            },
-            success: deleteSuc,
-            err: deleteErr
-        })
-        function deleteSuc(data) {
-            alert("删除成功！")
-            $(_self).parent().parent().parent().remove();
-            var lis =  $("#checkListContainer li");
-            var lisHeight = $("#checkListContainer li").height();
-            var totalHeight = lis.length*lisHeight;
-            var $height = $("#checkListContainer").height();
-            $("#checkListContainer").css("min-height",totalHeight+1+"px");
-        }
-        function deleteErr(err) {
-            alert("删除失败!")
-        }
-    })
+    }
 }
 //页面加载的时候的失败回调
 function myerror(err) {
