@@ -86,7 +86,7 @@ summerready = function () {
             alert("授权成功！");
         }
         function myerror(err) {
-            alert("操作失败！")
+            alert("芝麻账户不存在！")
         }
     })
     //进来请求数据
