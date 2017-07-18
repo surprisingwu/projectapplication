@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+server_address=mbs.yyuap.com
+server_deploy_type=\u4E91\u7AEF\u90E8\u7F72
+server_group=mbs.yyuap.com;8080;\u4E91\u7AEF\u90E8\u7F72
+server_port=8080

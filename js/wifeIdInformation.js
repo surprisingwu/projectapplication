@@ -243,12 +243,10 @@ function mycallback(data) {
     hideWaiting();
 }
 function myerror(error) {
-    alert(JSON.stringify(error))
     hideWaiting();
     alert("识别失败，请重新识别！");
 }
 function myconfirmcallback(data) {
-    alert(JSON.stringify(data))
     window.location.href = "userMesg.html";
 }
 function myconfirmerror(e) {
@@ -282,19 +280,6 @@ function openCamaraOrAlbum(args) {
 //     var $photoContainer = $(".photoContainer");
 //     var objContainer = null;
 //     objContainer = $photoContainer;
-//     // $.ajax({
-//     //     url: args.imgPath,
-//     //     type: "POST",
-//     //     datatype: "jsonp",
-//     //     contenttype :"application/x-www-form-urlencoded;charset=utf-8",
-//     //     success: function (data) {
-//     //         console.log(encodeURI(data));
-//     //         alert("ok");
-//     //     },
-//     //     error: function (e) {
-//     //         alert(e);
-//     //     }
-//     // })
 //     showWaiting();
 //     if (!!objContainer.find("img")) {
 //         objContainer.html("");
