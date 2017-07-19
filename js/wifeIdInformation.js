@@ -223,6 +223,7 @@ function hideWaiting() {
     }
 }
 function mycallback(data) {
+    alert(JSON.stringify(data))
     if (JSON.parse(data.response).sucess === "false"){
         hideWaiting()
         alert("识别失败！")
@@ -243,6 +244,7 @@ function mycallback(data) {
     hideWaiting();
 }
 function myerror(error) {
+    alert(JSON.stringify(error))
     hideWaiting();
     alert("识别失败，请重新识别！");
 }
@@ -269,9 +271,11 @@ function openCamaraOrAlbum(args) {
         "fileURL" : imgPath, //需要上传的文件路径
         "type" : "image/jpeg", //上传文件的类型 > 例：图片为"image/jpeg"
         "params" : {
-            typeId: "2"
+            typeId: "2",
+            url:appSettings.requerl
         },
-        "SERVER" : "http://115.236.160.13:8082/fin-ifbp-base/fin/mobile/ocr/fDocr" //服务器地址
+        //"SERVER" : "http://115.236.160.13:8082/fin-ifbp-base/fin/mobile/ocr/fDocr" //服务器地址
+        "SERVER" : "http://blog.csdn.net/u010974598/article/details/46458039" //服务器地址
     }, mycallback, myerror);
     $(".takePhotosTypeWraper").hide();
 }

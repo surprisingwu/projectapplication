@@ -77,6 +77,7 @@ summerready = function () {
         if (postVal){
             if (!msTestReg.test(postVal)){
                 alert("您输入的邮编不存在！")
+                return;
             }
         }
         var jsonData = $("#userMesgWraper").serialize();

@@ -11,12 +11,7 @@ document.addEventListener("deviceready", function () {
 }, false);
 summerready = function () {
     //调原生拿用户的所有信息
-    try{
-        $._callServiceNative();
-    }catch (e){
-
-    }
-
+    $._callServiceNative();
     //页面加载时，请求数据
     callservice(pageIndex);
     //点击历史按钮      显示已提交的    @todo
@@ -125,6 +120,7 @@ dataArr.forEach(function (item,index) {
                 })
                 function approvalSuc(data) {
                     alert("提交成功！");
+                    $(_self).remove();
                 }
                 function approvalErr(err) {
                     alert("提交失败！");
@@ -337,3 +333,4 @@ function callservice(pageIndex) {
         err: "myerror()"
     })
 }
+

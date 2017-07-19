@@ -3001,7 +3001,7 @@ input[type="radio"]:checked ~ .um-icon-checkbox:before, input[type="checkbox"]:c
 .um-icon-ios {
   width: 29px;
   height: 29px;
-  background: url("../img/icons.png") no-repeat;
+  background: url("../.img/icons.png") no-repeat;
   background-size: 145px 116px;
 }
 .um-icon-ios.um-icon-ios-general {
@@ -3830,7 +3830,7 @@ input[type="number"].form-control {
   background-color: #c8c8cd;
 }
 .um-input-search .form-control {
-  background: url(../img/search.png) 5px 50% #fff no-repeat;
+  background: url(../.img/search.png) 5px 50% #fff no-repeat;
   transition: width cubic-bezier(0.7, 0.27, 0.46, 0.9) 0.3s;
   background-size: 17px;
   padding-left: 25px;
@@ -4150,7 +4150,7 @@ input[type="number"].form-control {
 .um-check-group-media .um-check-group-item .um-check-group-item-icon {
   width: 20px;
   height: 20px;
-  background: url(../img/portal.jpg) center;
+  background: url(../.img/portal.jpg) center;
   background-size: 20px;
   border-radius: 50%;
   left: 8px;
@@ -5194,19 +5194,19 @@ input[type=range]::-webkit-slider-thumb:before {
   margin-left: 5px;
   margin-right: 5px;
   display: inline-block;
-  background-image: url(../img/grade-out.png);
+  background-image: url(../.img/grade-out.png);
   background-size: 100%;
   vertical-align: middle;
   transition: background-image .1s ease-in;
 }
 
 .um-grade-in {
-  background-image: url(../img/grade-in.png);
+  background-image: url(../.img/grade-in.png);
   background-size: 100%;
 }
 
 .um-grade-half {
-  background-image: url(../img/grade-half.png);
+  background-image: url(../.img/grade-half.png);
   background-size: 100%;
 }
 

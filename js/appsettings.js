@@ -51,23 +51,7 @@ $_ajax = {
         paramsObj.error = obj.err;
         summer.callAction(paramsObj);
     },
-    _callServiceNative: function () {
-        var params = {
-            "params": {
-                "transtype": "request_token"
-            },
-            "callback": _getTokenInfo,
-            "error": function(err) {
-                alert(err);
-            }
-        };
 
-        //调用原生做初始化
-        summer.callService("SummerService.gotoNative", params, false);
-        function _getTokenInfo(data) {
-            alert(JSON.stringify(data))
-        }
-    }
 
 }
 //点击返回上一页
@@ -119,7 +103,29 @@ $.extend({
     returnReg: function (name) {
         var reg =new RegExp("[\?\&]" + name + "=([^\&]+)", "i");
         return reg;
+    },
+//调原生获取用户的信息
+     _callServiceNative: function() {
+    var params = {
+        "params": {
+            "transtype": "request_token"
+        },
+        "callback": _getTokenInfo,
+        "error": function(err) {
+            alert(err);
+        }
+    };
+
+    //调用原生做初始化
+    summer.callService("SummerService.gotoNative", params, false);
+    function _getTokenInfo(data) {
+        var data  = JSON.parse(data.result);
+        var token = data.token;
+        var u_usercode = data.u_usercode;
+        localStorage.setItem("token",token);
+        localStorage.setItem("u_usercode",u_usercode);
     }
+}
 })
 
 function renderIMG($obj,path) {

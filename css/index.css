@@ -84,7 +84,7 @@ button.confirmUpload {
     font-size: 16px;
 }
 /*图片上传失败时弹出层的样式*/
-.imgtotast{
+imgtotast{
     position: absolute;
     top: 0;
     background-color: rgba(94,95,95,.6);

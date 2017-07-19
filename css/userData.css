@@ -23,7 +23,7 @@ i.turnBackLastPage {
 }
 @media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
     i.turnBackLastPage{
-       background: url("../img/back@3x.png") no-repeat left center; 
+       background: url("../img/back@3x.png") no-repeat left center;
         background-size: 0.266667rem 0.533333rem;
     }
 }
@@ -108,7 +108,7 @@ div.userDataMesgImgWraper{
 }
 @media  (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
     div.userDataMesgImgDelete{
-       background: url("../img/shanchu@3x.png") no-repeat center; 
+       background: url("../img/shanchu@3x.png") no-repeat center;
         background-size: 0.693333rem  0.693333rem;
     }
 }
