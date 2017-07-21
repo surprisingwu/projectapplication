@@ -11,6 +11,7 @@ appSettings.port = "8081";//融资租赁
 // appSettings.ip = "10.3.1.141";//现场调式
 // appSettings.port = "8081";//现场调式
 appSettings.proxy = "http://10.3.1.145"+":"+"8080";
+appSettings.uploadUrl ="http://115.236.160.13:8082/fin-ifbp-base/"
 //ip 10.3.1.145  8080
 //appSettings.requerl = "http://10.4.102.31:8091/fin-ifbp-base/fin/mobile/ocr/Docr";
 appSettings.requerl = "http://10.3.1.145:8080/fin-ifbp-base/fin/mobile/ocr/Docr";//ocr识别
@@ -104,6 +105,21 @@ $.extend({
         var reg =new RegExp("[\?\&]" + name + "=([^\&]+)", "i");
         return reg;
     },
+    //字符串转json
+    arr2json: function (arr) {
+       var obj = {};
+       arr.forEach(function (item,index) {
+            obj[item.name] = item.value;
+       })
+        return obj;
+    },
+    //俩个对象合并
+    contactObj: function (oldObj,newObj) {
+      for (var key in oldObj){
+          newObj[key] = oldObj[key];
+      }
+      return newObj;
+    },
 //调原生获取用户的信息
      _callServiceNative: function() {
     var params = {
@@ -111,21 +127,108 @@ $.extend({
             "transtype": "request_token"
         },
         "callback": _getTokenInfo,
-        "error": function(err) {
+        "error": function (err) {
             alert(err);
         }
-    };
-
+    }
     //调用原生做初始化
     summer.callService("SummerService.gotoNative", params, false);
     function _getTokenInfo(data) {
-        var data  = JSON.parse(data.result);
+        var data  = data.result;
         var token = data.token;
         var u_usercode = data.u_usercode;
-        localStorage.setItem("token",token);
-        localStorage.setItem("u_usercode",u_usercode);
+        try{
+            localStorage.removeItem("token");
+            localStorage.removeItem("u_usercode");
+        }catch (e){
+            localStorage.setItem("token",token);
+            localStorage.setItem("u_usercode",u_usercode);
+        }
     }
-}
+},
+    //原生跳转
+    jumpToPage: function () {
+        var params = {
+            "params": {
+                "transtype": "request_url",
+                title: "项目申请",
+                startPage: "html/idInformation.html",
+                appidversion: "",
+            },
+            "callback": _getTokenInfo,
+            "error": function(err) {
+                alert("先下载项目申请到本地！");
+            }
+        }
+        function _getTokenInfo(data) {
+            try {
+                var data = JSON.parse(data.result);
+            } catch (e) {
+                var data = data.result
+            }
+            var url = data.H5file;
+            alert(JSON.stringify(url));
+            window.location.href = url + "/index.html"
+        }
+        //调用原生做初始化
+        summer.callService("SummerService.gotoNative", params, false);
+    },
+    setTotastText: function (obj) {
+        //先进行初始化
+        init();
+        var totastContentBottomText = $("#totast .totastContentBottomText");
+        var $totast = $("#totast");
+        var text = obj.text||"没有获取到数据！";
+        totastContentBottomText.html(text);
+        $totast.show();
+       $("#totast .confirmBtn").on("click",function () {
+           $totast.hide();
+           offBindEvent();
+
+       })
+        $("#closeTotast").on("click",function () {
+            $totast.hide();
+            offBindEvent();
+        })
+        //进行初始化，添加html
+        function init() {
+            if ($("body").find("#totast").length>0){
+                return;
+            }
+            var htmlStr = '<div id="totast" style="display: none">'
+                +'<div id="closeTotast"></div>'
+                +'<div id="totastContent">'
+                +'<div id="totastContentTitle">'
+                +'<span class="totastContentTitleText">提示</span>'
+                +'</div>'
+                +'<div id="totastContentBottom">'
+                +'<p class="totastContentBottomText">没有获取到数据！</p>'
+            +'<button class="confirmBtn">确定</button>'
+                +'</div>'
+                +'</div>'
+                +'</div>';
+            $("body").append(htmlStr);
+        }
+        //对一些时间进行解绑
+        function offBindEvent() {
+            $("#totast .confirmBtn").off()
+            $("#closeTotast").off();
+        }
+    },
+    _openCamara: function () {
+        summer.openCamera({
+            callback: function (args) {
+                openCamaraOrAlbum(args);
+            }
+        });
+    },
+    _openPhotoAlbum: function () {
+        summer.openPhotoAlbum({
+            callback: function (args) {
+                openCamaraOrAlbum(args);
+            }
+        });
+    }
 })
 
 function renderIMG($obj,path) {
@@ -154,11 +257,6 @@ function renderIMG($obj,path) {
     function myRenderErr(err){
         alert("图片加载失败！");
     }
-}
-
-function returnReg(name) {
-    var reg = /marriage=([^\&]+)"/
-    return reg;
 }
 //一些可选的
 var selectTypeObj = {};
@@ -242,6 +340,80 @@ Date.prototype.Format = function (fmt) { //author: meizz
     for (var k in o)
         if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return fmt;
+}
+
+//半身照和ocr识别都走的这个逻辑
+function openCamaraOrAlbum(args) {
+    var objContainer = null;
+    if (isOcr === "0") {
+        var objContainer = $(".specialUserMesgListItemIcon");
+    }else {
+        objContainer =$(".photoContainer");
+        showWaiting();
+    }
+    if (!!objContainer.find("img")) {
+        objContainer.html("");
+    }
+    var imgPath = args.imgPath;
+    var max_width = 1080;
+    var max_height = 960;
+    var img = new Image();
+    img.src = imgPath; //base64字符串
+    //这里设置的是撑开图片盒子，也可以自己设置宽和高
+    img.onload = function () {
+        //对图片进行压缩
+        var width = img.width;
+        var height = img.height;
+        var canvas = document.createElement("canvas");
+        if(width > height) {
+            if(width > max_width) {
+                height = Math.round(height *= max_width / width);
+                width = max_width;
+            }
+        }else{
+            if(height > max_height) {
+                width = Math.round(width *= max_height / height);
+                height = max_height;
+            }
+        }
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(img, 0, 0, width, height);
+        //这里的压缩比例是0.85
+        if (isOcr === "1"){
+            var dataURL = canvas.toDataURL('image/jpeg',0.85);
+            var imageDom = new Image();
+            imageDom.src=dataURL;
+            imageDom.style.width = "100%";
+            imageDom.style.height = "100%";
+            objContainer.append(imageDom);
+            bodyOverfloawAuto();
+            id_img_code = dataURL.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
+            $_ajax._post({
+                url: "com.yyjr.ifbp.fin.controller.IFBPFINController",
+                handler: "handler",
+                data: {
+                    "transtype": "urlparamrequest",
+                    "requrl": appSettings.requerl,
+                    "reqmethod": "POST",
+                    "reqparam": "typeId=2&img="+ id_img_code,
+                },
+                success: "mycallback()",
+                err: "myerror()"
+            })
+        }else{
+            var dataURL = canvas.toDataURL('image/jpeg',0.85);
+            var imageDom = new Image();
+            imageDom.src=dataURL;
+            imageDom.style.width = "100%";
+            imageDom.style.height = "100%";
+            objContainer.append(imageDom);
+            bodyOverfloawAuto();
+            upbody_img_code = dataURL.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
+        }
+
+    }
+    $(".takePhotosTypeWraper").hide();
 }
 
 

@@ -1,0 +1,58 @@
+#totast{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 99;
+}
+#closeTotast{
+    height: 100%;
+    width: 100%;
+}
+#totastContent{
+    position: absolute;
+    width: 70%;
+    height: 128px;
+    background-color: #fff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 5px;
+}
+#totastContentTitle{
+	    width: 100%;
+    font-size: 17px;
+    background-color: rgb(114, 209, 255);
+    height: 36px;
+    line-height: 0.96rem;
+    padding-left: 20px;
+    border-radius: 5px 5px 0 0;
+}
+.totastContentTitleText{
+	color: #fff;
+}
+#totastContentBottom{
+	padding-top: 14px;
+	font-size: 16px;
+}
+.totastContentBottomText{
+	text-align: center;
+	color: rgb(115, 189, 217);
+	margin-bottom: 14px;
+}
+#totastContentBottom .confirmBtn{
+    display: block;
+    border: none;
+    outline: none;
+    height: 40px;
+    width: 100%;
+    line-height: 40px;
+    text-align: center;
+    border-top: 1px solid #F7F7F7;
+    color: rgb(115, 189, 217);
+    background: #fff;
+    font-size: 16px;
+    border-radius: 0 0 5px 5px;
+}

@@ -135,7 +135,9 @@ summerready = function () {
     //点击保存按钮的逻辑
     $(".headerOperation").on("click",function () {
         var telPhoneNumTest = $("#telPhoneNum").val().trim();
-        var telTestReg = /^1[3|4|5|7|8][0-9]{9}$/
+        var telTestReg = /^1[3|4|5|7|8][0-9]{9}$/;
+        var token = localStorage.getItem("token");
+        var u_usercode = localStorage.getItem("u_usercode");
         if ($("#userName").val().trim()===""){
             alert("请输入您的姓名！");
             return
@@ -170,31 +172,38 @@ summerready = function () {
             return;
         }
 
-        var jsonData = $("#userMesgWraper").serialize();
+        var jsonData = $("#userMesgWraper").serializeArray();
         var matecertypeVal = document.getElementById("select1_dummy").value;
         var mateindustytypeVal = document.getElementById("select2_dummy").value;
         var matedutyVal = document.getElementById("select3_dummy").value;
         var matesexVal = document.getElementById("select4_dummy").value;
-        jsonData = decodeURI(jsonData)
-        jsonData = jsonData.replace(/%2F/g,"-").replace(/=&/g,"=undefined&").replace(/=$/,"=undefined");
-        jsonData += "&document_type="+selectTypeObj.cardTypeObj[matecertypeVal];
-        jsonData += "&industry_type="+selectTypeObj.mateindustytypeObj[mateindustytypeVal];
-        jsonData += "&position="+selectTypeObj.matedutyObj[matedutyVal];
-        jsonData += "&sex="+selectTypeObj.sexObj[matesexVal];
-        //jsonData += "&mateidimg_code="+mateidimg_code+"&pk_quote_h="+quote_id;
-        jsonData += "&id_img="+mateidimg_code+"&pk_quote_h="+quote_id;
-        $_ajax._post({
-            url: "com.yyjr.ifbp.fin.controller.IFBPFINController",
-            handler: "handler",
-            data: {
-                "transtype": "urlparamrequest",
-                "requrl": appSettings.proxy+"/fin-ifbp-base/fin/guarantee/saveGuarantes",
-                "reqmethod": "POST",
-                "reqparam": jsonData,
-            },
-            success: "myconfirmcallback()",
-            err: "myconfirmerror()"
-        })
+        var jsonObj = $.arr2json(jsonData);
+        var tempObj = {
+            document_type: selectTypeObj.cardTypeObj[matecertypeVal],
+            industry_type:selectTypeObj.mateindustytypeObj[mateindustytypeVal],
+            position: selectTypeObj.matedutyObj[matedutyVal],
+            sex: selectTypeObj.sexObj[matesexVal],
+            pk_quote_h: quote_id,
+            token: token,
+            u_usercode: u_usercode
+        }
+        try {
+            jsonObj = Object.assign(tempObj, jsonObj)
+        }catch (e) {
+            jsonObj = $.contactObj(tempObj, jsonObj);
+        }
+        summer.upload({
+            "fileURL" : mateidimg_code, //需要上传的文件路径
+            "type" : "image/jpeg", //上传文件的类型 > 例：图片为"image/jpeg"
+            "params" : jsonObj,
+            "SERVER" : appSettings.uploadUrl+"fin/guarantee/saveGuarantes" //服务器地址
+        }, myconfirmcallback, myconfirmerror)
+        function myconfirmcallback(data) {
+            window.location.href = "userMesg.html";
+        }
+        function myconfirmerror(e) {
+            alert("保存失败！")
+        }
     })
 }
 //展示遮罩层
@@ -221,12 +230,12 @@ function hideWaiting() {
     }
 }
 function mycallback(data) {
-    if (data.sucess === "false"){
+    var data = JSON.parse(data.response).data;
+    if (data.sucess === "false"||data== undefined){
         hideWaiting()
         alert("识别失败！")
         return;
     }
-    var data = data.data;
     if (data == undefined||data=="") {
         hideWaiting()
         alert(您拍摄的照片不对);
@@ -249,67 +258,28 @@ function myerror(error) {
     hideWaiting()
     alert("识别失败，请重新识别！");
 }
-function myconfirmcallback(data) {
-    window.location.href = "userMesg.html";
-}
-function myconfirmerror(e) {
-    alert("保存失败！")
-}
 //半身照和ocr识别都走的这个逻辑
 function openCamaraOrAlbum(args) {
     var $photoContainer = $(".photoContainer");
-    var objContainer = null;
-    objContainer = $photoContainer;
+    if (!!$photoContainer.find("img")) {
+        $photoContainer.html("");
+    }
     showWaiting();
-    if (!!objContainer.find("img")) {
-        objContainer.html("");
-    }
-    var imgPath = args.imgPath;
-    var max_width = 1080;
-    var max_height = 960;
-    var img = new Image();
-    img.src = imgPath; //base64字符串
-    //这里设置的是撑开图片盒子，也可以自己设置宽和高
-    img.onload = function () {
-        //对图片进行压缩
-        var canvas = document.createElement("canvas");
-        var width = img.width;
-        var height = img.height;
-        if(width > height) {
-            if(width > max_width) {
-                height = Math.round(height *= max_width / width);
-                width = max_width;
-            }
-        }else{
-            if(height > max_height) {
-                width = Math.round(width *= max_height / height);
-                height = max_height;
-            }
-        }
-        canvas.width = width;
-        canvas.height = height;
-        canvas.getContext("2d").drawImage(img, 0, 0, width, height);
-        //这里的压缩比例是0.85
-        var dataURL = canvas.toDataURL('image/jpeg',0.85);
-        var imageDom = new Image();
-        imageDom.src=dataURL;
-        imageDom.style.width = "100%";
-        imageDom.style.height = "100%";
-        objContainer.append(imageDom);
-        mateidimg_code = dataURL.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
-        $_ajax._post({
-            url: "com.yyjr.ifbp.fin.controller.IFBPFINController",
-            handler: "handler",
-            data: {
-                "transtype": "urlparamrequest",
-                "requrl": appSettings.requerl,
-                "reqmethod": "POST",
-                "reqparam": "typeId=2&img="+ mateidimg_code,
-            },
-            success: "mycallback()",
-            err: "myerror()"
-        })
-    }
+    var  imgPath = args.imgPath;
+    mateidimg_code = imgPath;
+    var image = new Image();
+    image.src = imgPath;
+    image.style.width = "100%";
+    image.style.height = "100%";
+    $photoContainer.append(image);
+    summer.upload({
+        "fileURL" : imgPath, //需要上传的文件路径
+        "type" : "image/jpeg", //上传文件的类型 > 例：图片为"image/jpeg"
+        "params" : {
+            typeId: "2",
+        },
+        "SERVER" : appSettings.uploadUrl + "fin/mobile/ocr/fDocr"//服务器地址
+    }, mycallback, myerror);
     $(".takePhotosTypeWraper").hide();
 }
 //设置body样式为overflow：hiddem

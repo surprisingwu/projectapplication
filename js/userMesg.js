@@ -148,7 +148,9 @@ function myerror(e) {
 }
 //渲染个人档案的逻辑
 function showUserMesg(data) {
-    $("#userName").html(data.name || "");
+    try{
+        $("#userName").html(data.name || "");
+    }catch (e){}
     var sexText = data.sex;
     var $dateFat =  new Date(Number(data.birthday)).Format("yyyy-MM-dd");
    for (var key in selectTypeObj.sexObj){

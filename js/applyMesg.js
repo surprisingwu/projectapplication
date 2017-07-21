@@ -121,6 +121,11 @@ dataArr.forEach(function (item,index) {
                 function approvalSuc(data) {
                     alert("提交成功！");
                     $(_self).remove();
+                    var lis =  $("#checkListContainer li").length;
+                    var liHeight = $("#checkListContainer li").height();
+                    var totalHeight = lis*liHeight;
+                    var $height = $("#checkListContainer").height();
+                    $("#checkListContainer").css("min-height",totalHeight+1+"px");
                 }
                 function approvalErr(err) {
                     alert("提交失败！");
@@ -138,9 +143,7 @@ dataArr.forEach(function (item,index) {
                     success: deleteSuc,
                     err: deleteErr
                 })
-                //3047  2970 3047
                 function deleteSuc(data) {
-                    alert("删除成功！")
                     $(_self).remove();
                     var lis =  $("#checkListContainer li").length;
                     var liHeight = $("#checkListContainer li").height();
@@ -163,7 +166,9 @@ dataArr.forEach(function (item,index) {
 }
 //页面加载的时候的失败回调
 function myerror(err) {
-    alert("获取信息失败！")
+    $.setTotastText({
+        text:"没有获取到数据！"
+    })
 }
 //  拼接字符串
 function str2each(arr) {
