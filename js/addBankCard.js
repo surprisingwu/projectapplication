@@ -34,19 +34,42 @@ summerready = function () {
     })
     //打开相机的逻辑，回复body的样式，关闭弹出层
     $("#openCamaraDiv").on("click", function () {
-        summer.openCamera({
-            callback: function (args) {
-                openCamaraOrAlbum(args);
+        var params = {
+            "params": {
+                "transtype": "takephote",
+            },
+            "callback": _getTokenInfo,
+            "error": function (err) {
+                alert("打开相机失败！");
             }
-        });
+        }
+
+        function _getTokenInfo(data) {
+            var data = JSON.parse(data.result)
+            base64str = data.photostring;
+            openCamaraOrAlbum(base64str);
+        }
+        //调用原生做初始化
+        summer.callService("SummerService.gotoNative", params, false);
     })
     //点击打开相册的逻辑，回复body的样式，关闭弹出层
     $("#openAlbumDiv").on("click", function () {
-        summer.openPhotoAlbum({
-            callback: function (args) {
-                openCamaraOrAlbum(args);
+        var params = {
+            "params": {
+                "transtype": "openalbum",
+            },
+            "callback": _getTokenInfo,
+            "error": function (err) {
+                alert("打开相册失败！");
             }
-        });
+        }
+        function _getTokenInfo(data) {
+            var data = JSON.parse(data.result)
+            base64str = data.photostring;
+            openCamaraOrAlbum(base64str);
+        }
+        //调用原生做初始化
+        summer.callService("SummerService.gotoNative", params, false);
     })
 $(".headerOperation").on("click",function () {
     var token = localStorage.getItem("token");
@@ -63,15 +86,22 @@ $(".headerOperation").on("click",function () {
         alert("请输入银行卡号类型！");
         return
     }
-    var jsonData = $("#userMesgWraper").serializeArray();
-    var jsonObj = $.arr2json(jsonData);
-    jsonObj.probank_id = id;
-    summer.upload({
-        "fileURL" : show_img_code, //需要上传的文件路径
-        "type" : "image/jpeg", //上传文件的类型 > 例：图片为"image/jpeg"
-        "params" : jsonObj,
-        "SERVER" : appSettings.uploadUrl+"fin/mobile/user/addBankInfo" //服务器地址
-    }, myconfirmcallback, myconfirmerror)
+    var jsonData = $("#userMesgWraper").serialize();
+    jsonData = decodeURI(jsonData);
+    jsonData = jsonData.replace(/=&/g,"=undefined&").replace(/=$/,"=undefined");
+    jsonData += "&show_img_code="+show_img_code+"&probank_id="+id;
+    $_ajax._post({
+        url: "com.yyjr.ifbp.fin.controller.IFBPFINController",
+        handler: "handler",
+        data: {
+            "transtype": "urlparamrequest",
+            "requrl": appSettings.proxy+"/fin-ifbp-base/fin/mobile/user/addBankInfo",
+            "reqmethod": "POST",
+            "reqparam": jsonData,
+        },
+        success: myconfirmcallback,
+        err: myconfirmerror
+    })
     function myconfirmcallback(data) {
         window.location.href = "userMesg.html";
     }
@@ -104,8 +134,13 @@ function hideWaiting() {
     }
 }
 function mycallback(data) {
-    var data = JSON.parse(data.response).data
-    if (data.success === "false"||data == undefined){
+    if (data.success === "false"){
+        hideWaiting();
+        alert("识别失败！")
+        return;
+    }
+    var data  = data.data;
+    if (data === null||data == undefined){
         hideWaiting();
         alert("识别失败！")
         return;
@@ -127,25 +162,29 @@ function myerror(error) {
 //半身照和ocr识别都走的这个逻辑
 function openCamaraOrAlbum(args) {
     var $photoContainer = $(".photoContainer");
-    if (!!$photoContainer.find("img")) {
+    if ($photoContainer.find("img").length>0) {
         $photoContainer.html("");
     }
     showWaiting();
-    var  imgPath = args.imgPath;
+    var  imgPath = args;
     show_img_code = imgPath;
     var image = new Image();
-    image.src = imgPath;
-    image.style.width = "100%";
-    image.style.height = "100%";
-    $photoContainer.append(image);
-    summer.upload({
-        "fileURL" : imgPath, //需要上传的文件路径
-        "type" : "image/jpeg", //上传文件的类型 > 例：图片为"image/jpeg"
-        "params" : {
-            typeId: "17",
+    image.onload = function () {
+        $._compressImg(image,imgPath,$photoContainer);
+    }
+    image.src = "data:image/jpeg;base64," + imgPath;
+    $_ajax._post({
+        url: "com.yyjr.ifbp.fin.controller.IFBPFINController",
+        handler: "handler",
+        data: {
+            "transtype": "urlparamrequest",
+            "requrl": appSettings.requerl,
+            "reqmethod": "POST",
+            "reqparam": "typeId=17&img="+ show_img_code,
         },
-        "SERVER" : appSettings.uploadUrl + "fin/mobile/ocr/fDocr"//服务器地址
-    }, mycallback, myerror);
+        success: mycallback,
+        err: myerror
+    })
     $(".takePhotosTypeWraper").hide();
 }
 

@@ -3,9 +3,10 @@
  */
 var busyOverlay;
 var upbody_img_code = "";
-var id_img_code="";
+var id_img_code = "";
 var scrollTopNum;
 var isOcr = "1"//   1 是ocr识别      0 是半身照
+var base64str = "";
 $(function () {
     // var curr = new Date().getFullYear();
     var opt = {
@@ -92,7 +93,7 @@ summerready = function () {
         isOcr = "1";
     })
     //如果是     立项报价跳过来，要调下原生获取用户的  token
-    if (localStorage.getItem("token") !== "undefined"){
+    if (localStorage.getItem("token") !== "undefined") {
         $._callServiceNative();
     }
     //点击日常半身照上传的逻辑
@@ -113,212 +114,200 @@ summerready = function () {
     })
     //打开相机的逻辑，回复body的样式，关闭弹出层
     $("#openCamaraDiv").on("click", function () {
-        summer.openCamera({
-            callback: function (args) {
-                openCamaraOrAlbum(args);
+        bodyOverfloawAuto()
+        var params = {
+            "params": {
+                "transtype": "takephote",
+            },
+            "callback": _getTokenInfo,
+            "error": function (err) {
+                alert("打开相机失败！");
             }
-        });
+        }
+
+        function _getTokenInfo(data) {
+            var data = JSON.parse(data.result)
+            base64str = data.photostring;
+            openCamaraOrAlbum(base64str);
+        }
+
+        //调用原生做初始化
+        summer.callService("SummerService.gotoNative", params, false);
     })
     //点击打开相册的逻辑，回复body的样式，关闭弹出层
     $("#openAlbumDiv").on("click", function () {
-        summer.openPhotoAlbum({
-            callback: function (args) {
-                openCamaraOrAlbum(args);
+        bodyOverfloawAuto()
+        var params = {
+            "params": {
+                "transtype": "openalbum",
+            },
+            "callback": _getTokenInfo,
+            "error": function (err) {
+                alert("打开相册失败！");
             }
-        });
+        }
+
+        function _getTokenInfo(data) {
+            var data = JSON.parse(data.result)
+            base64str = data.photostring;
+            openCamaraOrAlbum(base64str);
+        }
+
+        //调用原生做初始化
+        summer.callService("SummerService.gotoNative", params, false);
     })
 //点击保存按钮   提交数据到后台
-    $(".headerOperation").on("click",function () {
+    $(".headerOperation").on("click", function () {
         var token = localStorage.getItem("token");
         var u_usercode = localStorage.getItem("u_usercode");
-      if ($("#userName").val().trim()===""){
-          alert("请输入您的姓名！");
-          return
-      }
-      if ($("#userNation").val().trim()===""){
-          alert("请输入您的民族！");
-          return
-      }
-        if ($("#birthDate").val().trim()===""){
+        if ($("#userName").val().trim() === "") {
+            alert("请输入您的姓名！");
+            return
+        }
+        if ($("#userNation").val().trim() === "") {
+            alert("请输入您的民族！");
+            return
+        }
+        if ($("#birthDate").val().trim() === "") {
             alert("请输入您的出生日期！");
             return
         }
-        if ($("#cardNum").val().trim()===""){
+        if ($("#cardNum").val().trim() === "") {
             alert("请输入您的证件号码！");
             return
         }
-        if ($("#userAddress").val().trim()===""){
+        if ($("#userAddress").val().trim() === "") {
             alert("请输入您的住址！");
             return
         }
-        var  cardNum = $("#cardNum").val().trim();
-        if (cardNum.length !== 18){
+        var cardNum = $("#cardNum").val().trim();
+        if (cardNum.length !== 18) {
             alert("请输入正确的身份证号码！")
             return
         }
-       var jsonData = $("#userMesgWraper").serializeArray();
-        var jsonObj = $.arr2json(jsonData);
+        var jsonData = $("#userMesgWraper").serialize();
+        jsonData = decodeURI(jsonData)
+        jsonData = jsonData.replace(/%2F/g,"-");
         var marriTypeVal = $("#select1_dummy").val();
         var document_typeVal = $("#select2_dummy").val();
         var sexVal = $("#select3_dummy").val();
-        var quote_id = localStorage.getItem("quote_id");
-        var tempObj = {
-            marriage:selectTypeObj.marriageObj[marriTypeVal],
-            document_type:selectTypeObj.cardTypeObj[document_typeVal],
-            sex:selectTypeObj.sexObj[sexVal],
-            u_usercode:u_usercode,
-            quote_id: quote_id,
-            token:token
-        }
-        try {
-            jsonObj = Object.assign(tempObj, jsonObj)
-        }catch (e) {
-            jsonObj = $.contactObj(tempObj, jsonObj);
-        }
-        if (id_img_code === ""){
-            $.ajax({
-                url:appSettings.uploadUrl+"fin/mobile/user/addLesseeBaseInfo",
-                data:jsonObj,
-                type:"POST",
-                dataType: "json",
-                contentType:"application/json&charset=utf-8",
-                success:confirmCallback,
-                error:confirmError,
-            })
+        jsonData +="&marriage="+selectTypeObj.marriageObj[marriTypeVal];
+        jsonData +="&document_type="+selectTypeObj.cardTypeObj[document_typeVal];
+        if (upbody_img_code === ""){
+            jsonData +="&upbody_img_code=undefined";
         }else {
-            summer.upload({
-                "fileURL" : id_img_code, //需要上传的文件路径
-                "type" : "image/jpeg", //上传文件的类型 > 例：图片为"image/jpeg"
-                "params" : jsonObj,
-                "SERVER" : appSettings.uploadUrl+"fin/mobile/user/addLesseeBaseInfo" //服务器地址
-            }, confirmCallback, confirmError);
+            jsonData +="&upbody_img_code="+upbody_img_code;
         }
+        jsonData +="&id_img_code="+id_img_code;
+        jsonData +="&sex="+selectTypeObj.sexObj[sexVal];
+        var quote_id = localStorage.getItem("quote_id");
+        jsonData +="&quote_id="+quote_id;
+        $_ajax._post({
+            url: "com.yyjr.ifbp.fin.controller.IFBPFINController",
+            handler: "handler",
+            data: {
+                "transtype": "urlparamrequest",
+                "requrl": appSettings.proxy+"/fin-ifbp-base/fin/mobile/user/addLesseeBaseInfo",
+                "reqmethod": "POST",
+                "reqparam": jsonData,
+            },
+            success: confirmCallback,
+            err: confirmError
+        })
         function confirmCallback(data) {
-            var id = JSON.parse(data.response).data.id;
+            var id = data.data.id;
             try{
                 localStorage.removeItem("id");
             }catch (e){
 
             }
-            if(!!$(".specialUserMesgListItemIcon").find("img")){
-                summer.upload({
-                    "fileURL" : upbody_img_code, //需要上传的文件路径
-                    "type" : "image/jpeg", //上传文件的类型 > 例：图片为"image/jpeg"
-                    "params" : {
-                        "id": id,
-                    },
-                    "SERVER" : appSettings.uploadUrl+"fin/mobile/user/addLesseeBodyImg" //服务器地址
-                }, ubbodyCallback, upbodyError);
-            }
             localStorage.setItem("id",id);
             window.location.href = "userMesg.html";
-            function ubbodyCallback(data) {
-                console.log("保存成功！");
-            }
-            function upbodyError() {
-            }
         }
         function confirmError(e) {
             alert("保存失败！")
         }
     })
-    
+
 }
-//展示遮罩层
-function showWaiting() {
-    bodyOverfloawHidden();
-    busyOverlay = getBusyOverlay('viewport', {
-        color : 'white',
-        opacity : 0.75,
-        text : 'viewport: loading...',
-        style : 'text-shadow: 0 0 3px black;font-weight:bold;font-size:14px;color:white'
-    }, {
-        color : '#175499',
-        size : 50,
-        type : 'o'
-    });
-    if (busyOverlay) {
-        busyOverlay.settext("正在加载......");
-    }
-}
-//关闭遮罩层
-function hideWaiting() {
-    bodyOverfloawAuto();
-    if (busyOverlay) {
-        busyOverlay.remove();
-        busyOverlay = null;
-    }
-}
+
 //设置body样式为overflow：hiddem
 function bodyOverfloawHidden() {
     scrollTopNum = $("body").scrollTop();
     $("body").css({
-        position:"fixed",
-        overflow:"hidden",
+        position: "fixed",
+        overflow: "hidden",
     })
 }
 //还原body的样式为overflow：auto
 function bodyOverfloawAuto() {
     $("body").css({
-        overflow:"auto",
-        position:"relative",
+        overflow: "auto",
+        position: "relative",
     })
     $("body").scrollTop(scrollTopNum)
 }
 function openCamaraOrAlbum(args) {
-    var objContainer = null;
     if (isOcr === "0") {
         var objContainer = $(".specialUserMesgListItemIcon");
     } else {
-        objContainer = $(".photoContainer");
+       var  objContainer = $(".photoContainer");
         showWaiting();
     }
-        if (!!objContainer.find("img")) {
-            objContainer.html("");
-        }
-
-        var imgPath = args.imgPath;
-        var image = new Image();
-        image.src = imgPath;
-        image.style.width = "100%";
-        image.style.height = "100%";
-        objContainer.append(image);
-        if (isOcr === "1") {
-            id_img_code = imgPath;
-            summer.upload({
-                "fileURL": imgPath, //需要上传的文件路径
-                "type": "image/jpeg", //上传文件的类型 > 例：图片为"image/jpeg"
-                "params": {
-                    typeId: "2",
-                },
-                "SERVER": appSettings.uploadUrl + "fin/mobile/ocr/fDocr" //服务器地址
-            }, mycallback, myerror);
-        } else {
-            bodyOverfloawAuto();
-            upbody_img_code = imgPath;
-        }
-        $(".takePhotosTypeWraper").hide();
+    if (objContainer.find("img").length > 0) {
+        objContainer.html("");
+    }
+    var imgPath = args;
+    var image = new Image();
+    image.onload = function () {
+        $._compressImg(image, imgPath, objContainer);
+    }
+    image.src = "data:image/jpeg;base64," + imgPath;
+    if (isOcr === "1") {
+        id_img_code = imgPath;
+        $_ajax._post({
+            url: "com.yyjr.ifbp.fin.controller.IFBPFINController",
+            handler: "handler",
+            data: {
+                "transtype": "urlparamrequest",
+                "requrl": appSettings.requerl,
+                "reqmethod": "POST",
+                "reqparam": "typeId=2&img=" + id_img_code,
+            },
+            success: mycallback,
+            err: myerror
+        })
+    } else {
+        bodyOverfloawAuto();
+        upbody_img_code = imgPath;
+    }
+$(".takePhotosTypeWraper").hide();
 }
 //ocr识别成功，对返回的数据进行渲染
 function mycallback(data) {
     bodyOverfloawAuto();
-    var data = JSON.parse(data.response).data;
-    if (data.success === "false"||data == undefined){
+    if (data.success === "false"){
+        hideWaiting();
+        alert("识别失败！");
+        return;
+    }
+    var data  = data.data;
+    if (data === null || data == undefined) {
         hideWaiting();
         alert("识别失败！")
         return;
     }
-    if(data.name == ""||data.sex==""||data.nation==""||data.birthday=="") {
+    if (data.name == "" || data.sex == "" || data.nation == "" || data.birthday == "") {
         hideWaiting()
         alert("请核查您上传的照片")
         return;
     }
-    $("#userName").val(data.name||"");
-    $("#select3_dummy").val(data.sex||"");
-    $("#userNation").val(data.nation||"");
-    $("#birthDate").val(data.birthday||"");
-    $("#userAddress").val(data.birth_address||"");
-    $("#cardNum").val(data.document_id||"")
+    $("#userName").val(data.name || "");
+    $("#select3_dummy").val(data.sex || "");
+    $("#userNation").val(data.nation || "");
+    $("#birthDate").val(data.birthday || "");
+    $("#userAddress").val(data.birth_address || "");
+    $("#cardNum").val(data.document_id || "")
     hideWaiting();
 }
 //ocr 识别失败的逻辑
@@ -328,8 +317,8 @@ function myerror(error) {
 }
 
 //获取url后面的内容
-function getQueryByName(str,name) {
-   //var params = decodeURI(location.search);
+function getQueryByName(str, name) {
+    //var params = decodeURI(location.search);
     var result = str.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
     if (result == null || result.length < 1) {
         return "";

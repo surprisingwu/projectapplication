@@ -40,19 +40,41 @@ summerready = function () {
     })
     //打开相机的逻辑，回复body的样式，关闭弹出层
     $("#openCamaraDiv").on("click", function () {
-        summer.openCamera({
-            callback: function (args) {
-                openCamaraOrAlbum(args);
+        var params = {
+            "params": {
+                "transtype": "takephote",
+            },
+            "callback": _getTokenInfo,
+            "error": function (err) {
+                alert("打开相机失败！");
             }
-        });
+        }
+        function _getTokenInfo(data) {
+            var data = JSON.parse(data.result)
+            base64str = data.photostring;
+            openCamaraOrAlbum(base64str);
+        }
+        //调用原生做初始化
+        summer.callService("SummerService.gotoNative", params, false);
     })
     //点击打开相册的逻辑，回复body的样式，关闭弹出层
     $("#openAlbumDiv").on("click", function () {
-        summer.openPhotoAlbum({
-            callback: function (args) {
-                openCamaraOrAlbum(args);
+        var params = {
+            "params": {
+                "transtype": "openalbum",
+            },
+            "callback": _getTokenInfo,
+            "error": function (err) {
+                alert("打开相册失败！");
             }
-        });
+        }
+        function _getTokenInfo(data) {
+            var data = JSON.parse(data.result)
+            base64str = data.photostring;
+            openCamaraOrAlbum(base64str);
+        }
+        //调用原生做初始化
+        summer.callService("SummerService.gotoNative", params, false);
     })
     //点击保存按钮    信息提交到后台
     $(".headerOperation").on("click", function () {
@@ -125,8 +147,14 @@ function hideWaiting() {
     }
 }
 function mycallback(data) {
-    var data = JSON.parse(data.response).data
-    if (data.success === "false"||data == undefined) {
+    bodyOverfloawAuto();
+    if (data.success === "false"){
+        hideWaiting()
+        alert("识别失败！")
+        return;
+    }
+    var data = data.data;
+    if (data === null||data == undefined) {
         hideWaiting()
         alert("识别失败！")
         return;
@@ -166,20 +194,24 @@ function openCamaraOrAlbum(args) {
         $photoContainer.html("");
     }
     showWaiting();
-    var imgPath = args.imgPath;
+    var imgPath = args;
     var image = new Image();
-    image.src = imgPath;
-    image.style.width = "100%";
-    image.style.height = "100%";
-    $photoContainer.append(image);
-    summer.upload({
-        "fileURL": imgPath, //需要上传的文件路径
-        "type": "image/jpeg", //上传文件的类型 > 例：图片为"image/jpeg"
-        "params": {
-            typeId: "20",
+    image.onload = function () {
+        $._compressImg(image,imgPath,$photoContainer);
+    }
+    image.src = "data:image/jpeg;base64," + imgPath;
+    $_ajax._post({
+        url: "com.yyjr.ifbp.fin.controller.IFBPFINController",
+        handler: "handler",
+        data: {
+            "transtype": "urlparamrequest",
+            "requrl": appSettings.requerl,
+            "reqmethod": "POST",
+            "reqparam": "typeId=20&img=" + imgPath,
         },
-        "SERVER": appSettings.uploadUrl + "fin/mobile/ocr/fDocr"
-    }, mycallback, myerror);
+        success: mycallback,
+        err: myerror
+    })
     $(".takePhotosTypeWraper").hide();
 }
 //设置body样式为overflow：hiddem

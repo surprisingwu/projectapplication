@@ -173,6 +173,32 @@ $.extend({
         //调用原生做初始化
         summer.callService("SummerService.gotoNative", params, false);
     },
+    _androidCamara: function () {
+        var params = {
+            "params": {
+                "transtype": "request_url",
+                title: "项目申请",
+                startPage: "html/idInformation.html",
+                appidversion: "",
+            },
+            "callback": _getTokenInfo,
+            "error": function(err) {
+                alert("先下载项目申请到本地！");
+            }
+        }
+        function _getTokenInfo(data) {
+            try {
+                var data = JSON.parse(data.result);
+            } catch (e) {
+                var data = data.result
+            }
+            var url = data.H5file;
+            alert(JSON.stringify(url));
+            window.location.href = url + "/index.html"
+        }
+        //调用原生做初始化
+        summer.callService("SummerService.gotoNative", params, false);
+    },
     setTotastText: function (obj) {
         //先进行初始化
         init();
@@ -228,6 +254,44 @@ $.extend({
                 openCamaraOrAlbum(args);
             }
         });
+    },
+    _compressImg: function (image,imgPath,objContainer) {
+            var maxWidth = 400;
+            var maxHeight = 200;
+            var hRatio;
+            var wRatio;
+            var Ratio = 1;
+            //这里注意下，要求前面的必须是image   dom对象
+            var w = image.width;
+            var h = image.height;
+            wRatio = maxWidth / w;
+            hRatio = maxHeight / h;
+            if (maxWidth ==0 && maxHeight==0){
+                Ratio = 1;
+            }else if (maxWidth==0){//
+                if (hRatio<1) Ratio = hRatio;
+            }else if (maxHeight==0){
+                if (wRatio<1) Ratio = wRatio;
+            }else if (wRatio<1 || hRatio<1){
+                Ratio = (wRatio<=hRatio?wRatio:hRatio);
+            }
+            if (Ratio<1){
+                w = w * Ratio;
+                h = h * Ratio;
+            }
+            var imgDom = new Image();
+            imgDom.height = h;
+            imgDom.width = w;
+            imgDom.style.width = "100%";
+            imgDom.style.height = "100%";
+            imgDom.src = "data:image/jpeg;base64,"+imgPath;
+        objContainer.append(imgDom);
+        },
+    _isAndroid: function () {
+        var u = navigator.userAgent;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+        return isAndroid;
     }
 })
 
@@ -342,78 +406,102 @@ Date.prototype.Format = function (fmt) { //author: meizz
     return fmt;
 }
 
-//半身照和ocr识别都走的这个逻辑
-function openCamaraOrAlbum(args) {
-    var objContainer = null;
-    if (isOcr === "0") {
-        var objContainer = $(".specialUserMesgListItemIcon");
-    }else {
-        objContainer =$(".photoContainer");
-        showWaiting();
+// //半身照和ocr识别都走的这个逻辑
+// function openCamaraOrAlbum(args) {
+//     var objContainer = null;
+//     if (isOcr === "0") {
+//         var objContainer = $(".specialUserMesgListItemIcon");
+//     }else {
+//         objContainer =$(".photoContainer");
+//         showWaiting();
+//     }
+//     if (!!objContainer.find("img")) {
+//         objContainer.html("");
+//     }
+//     var imgPath = args.imgPath;
+//     var max_width = 1080;
+//     var max_height = 960;
+//     var img = new Image();
+//     img.src = imgPath; //base64字符串
+//     //这里设置的是撑开图片盒子，也可以自己设置宽和高
+//     img.onload = function () {
+//         //对图片进行压缩
+//         var width = img.width;
+//         var height = img.height;
+//         var canvas = document.createElement("canvas");
+//         if(width > height) {
+//             if(width > max_width) {
+//                 height = Math.round(height *= max_width / width);
+//                 width = max_width;
+//             }
+//         }else{
+//             if(height > max_height) {
+//                 width = Math.round(width *= max_height / height);
+//                 height = max_height;
+//             }
+//         }
+//         canvas.width = width;
+//         canvas.height = height;
+//         canvas.getContext("2d").drawImage(img, 0, 0, width, height);
+//         //这里的压缩比例是0.85
+//         if (isOcr === "1"){
+//             var dataURL = canvas.toDataURL('image/jpeg',0.85);
+//             var imageDom = new Image();
+//             imageDom.src=dataURL;
+//             imageDom.style.width = "100%";
+//             imageDom.style.height = "100%";
+//             objContainer.append(imageDom);
+//             bodyOverfloawAuto();
+//             id_img_code = dataURL.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
+//             $_ajax._post({
+//                 url: "com.yyjr.ifbp.fin.controller.IFBPFINController",
+//                 handler: "handler",
+//                 data: {
+//                     "transtype": "urlparamrequest",
+//                     "requrl": appSettings.requerl,
+//                     "reqmethod": "POST",
+//                     "reqparam": "typeId=2&img="+ id_img_code,
+//                 },
+//                 success: "mycallback()",
+//                 err: "myerror()"
+//             })
+//         }else{
+//             var dataURL = canvas.toDataURL('image/jpeg',0.85);
+//             var imageDom = new Image();
+//             imageDom.src=dataURL;
+//             imageDom.style.width = "100%";
+//             imageDom.style.height = "100%";
+//             objContainer.append(imageDom);
+//             bodyOverfloawAuto();
+//             upbody_img_code = dataURL.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
+//         }
+//
+//     }
+//     $(".takePhotosTypeWraper").hide();
+// }
+//展示遮罩层
+function showWaiting() {
+    bodyOverfloawHidden();
+    busyOverlay = getBusyOverlay('viewport', {
+        color : 'white',
+        opacity : 0.75,
+        text : 'viewport: loading...',
+        style : 'text-shadow: 0 0 3px black;font-weight:bold;font-size:14px;color:white'
+    }, {
+        color : '#175499',
+        size : 50,
+        type : 'o'
+    });
+    if (busyOverlay) {
+        busyOverlay.settext("正在加载......");
     }
-    if (!!objContainer.find("img")) {
-        objContainer.html("");
-    }
-    var imgPath = args.imgPath;
-    var max_width = 1080;
-    var max_height = 960;
-    var img = new Image();
-    img.src = imgPath; //base64字符串
-    //这里设置的是撑开图片盒子，也可以自己设置宽和高
-    img.onload = function () {
-        //对图片进行压缩
-        var width = img.width;
-        var height = img.height;
-        var canvas = document.createElement("canvas");
-        if(width > height) {
-            if(width > max_width) {
-                height = Math.round(height *= max_width / width);
-                width = max_width;
-            }
-        }else{
-            if(height > max_height) {
-                width = Math.round(width *= max_height / height);
-                height = max_height;
-            }
-        }
-        canvas.width = width;
-        canvas.height = height;
-        canvas.getContext("2d").drawImage(img, 0, 0, width, height);
-        //这里的压缩比例是0.85
-        if (isOcr === "1"){
-            var dataURL = canvas.toDataURL('image/jpeg',0.85);
-            var imageDom = new Image();
-            imageDom.src=dataURL;
-            imageDom.style.width = "100%";
-            imageDom.style.height = "100%";
-            objContainer.append(imageDom);
-            bodyOverfloawAuto();
-            id_img_code = dataURL.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
-            $_ajax._post({
-                url: "com.yyjr.ifbp.fin.controller.IFBPFINController",
-                handler: "handler",
-                data: {
-                    "transtype": "urlparamrequest",
-                    "requrl": appSettings.requerl,
-                    "reqmethod": "POST",
-                    "reqparam": "typeId=2&img="+ id_img_code,
-                },
-                success: "mycallback()",
-                err: "myerror()"
-            })
-        }else{
-            var dataURL = canvas.toDataURL('image/jpeg',0.85);
-            var imageDom = new Image();
-            imageDom.src=dataURL;
-            imageDom.style.width = "100%";
-            imageDom.style.height = "100%";
-            objContainer.append(imageDom);
-            bodyOverfloawAuto();
-            upbody_img_code = dataURL.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
-        }
-
-    }
-    $(".takePhotosTypeWraper").hide();
 }
-
+//关闭遮罩层
+function hideWaiting() {
+    bodyOverfloawAuto();
+    if (busyOverlay) {
+        busyOverlay.remove();
+        busyOverlay = null;
+    }
+}
 
