@@ -1,18 +1,9 @@
 
 var appSettings = {};
-//ip:115.236.160.13    8081
-//appSettings.ip = "10.4.102.31";//融资租赁
 appSettings.ip = "115.236.160.13";//融资租赁
 appSettings.port = "8081";//融资租赁
-//appSettings.ip = "10.4.102.56";//黄鹏
-//appSettings.port = "8888";//融资租赁
-//appSettings.port = "8080";//黄鹏
-
-// appSettings.ip = "10.3.1.141";//现场调式
-// appSettings.port = "8081";//现场调式
 appSettings.proxy = "http://10.3.1.145"+":"+"8080";
 appSettings.uploadUrl ="http://115.236.160.13:8082/fin-ifbp-base/"
-//ip 10.3.1.145  8080
 //appSettings.requerl = "http://10.4.102.31:8091/fin-ifbp-base/fin/mobile/ocr/Docr";
 appSettings.requerl = "http://10.3.1.145:8080/fin-ifbp-base/fin/mobile/ocr/Docr";//ocr识别
 appSettings.listRequerl = "http://10.3.1.145:8080/fin-ifbp-base/fin/quote/quotoMgM";
@@ -52,8 +43,6 @@ $_ajax = {
         paramsObj.error = obj.err;
         summer.callAction(paramsObj);
     },
-
-
 }
 //点击返回上一页
 $.fn.extend({
@@ -154,6 +143,7 @@ $.extend({
                 title: "项目申请",
                 startPage: "html/idInformation.html",
                 appidversion: "",
+                pageparam: quoto_id
             },
             "callback": _getTokenInfo,
             "error": function(err) {
@@ -169,6 +159,30 @@ $.extend({
             var url = data.H5file;
             alert(JSON.stringify(url));
             window.location.href = url + "/index.html"
+        }
+        //调用原生做初始化
+        summer.callService("SummerService.gotoNative", params, false);
+    },
+    //获取pageparam
+    _getPageParam: function () {
+        var pageparam = "";
+        var params = {
+            "params": {
+                "transtype": "pageparam",
+            },
+            "callback": _getTokenInfo,
+            "error": function(err) {
+                alert("获取quoto_id失败！");
+            }
+        }
+        function _getTokenInfo(data) {
+            try {
+                var data = JSON.parse(data.result);
+            } catch (e) {
+                var data = data.result
+            }
+            pageparam = data.pageparam
+            localStorage.setItem("quote_id",pageparam)
         }
         //调用原生做初始化
         summer.callService("SummerService.gotoNative", params, false);
