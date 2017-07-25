@@ -99,6 +99,7 @@ summerready = function() {
 		jsonData = decodeURI(jsonData);
 		jsonData = jsonData.replace(/=&/g, "=undefined&").replace(/=$/, "=undefined");
 		jsonData += "&show_img_code=" + show_img_code + "&probank_id=" + id;
+        jsonData += "&token="+token+"&u_usercode="+u_usercode;
 		$_ajax._post({
 			url : "com.yyjr.ifbp.fin.controller.IFBPFINController",
 			handler : "handler",

@@ -212,6 +212,7 @@ summerready = function() {
 		jsonData += "&mateduty=" + selectTypeObj.matedutyObj[matedutyVal];
 		jsonData += "&matesex=" + selectTypeObj.sexObj[matesexVal];
 		jsonData += "&mateidimg_code=" + mateidimg_code + "&id=" + id;
+        jsonData += "&token="+token+"&u_usercode="+u_usercode;
 		$_ajax._post({
 			url : "com.yyjr.ifbp.fin.controller.IFBPFINController",
 			handler : "handler",

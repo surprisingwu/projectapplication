@@ -204,6 +204,7 @@ summerready = function() {
 		jsonData += "&sex=" + selectTypeObj.sexObj[sexVal];
         var quote_id = localStorage.getItem("quote_id");
 		jsonData += "&quote_id=" + quote_id;
+		jsonData += "&token="+token+"&u_usercode="+u_usercode;
 		$_ajax._post({
 			url : "com.yyjr.ifbp.fin.controller.IFBPFINController",
 			handler : "handler",
