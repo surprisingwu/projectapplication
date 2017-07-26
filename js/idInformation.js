@@ -90,9 +90,9 @@ summerready = function() {
 		isOcr = "1";
 	})
 	//如果是     立项报价跳过来，要调下原生获取用户的  token
-	if (localStorage.getItem("token") !== "undefined") {
-		$._callServiceNative();
-	}
+	if (localStorage.getItem("token") !== null) {
+        $._callServiceNative();
+    }
 	//点击日常半身照上传的逻辑
 	$(".specialUserMesgListItemIcon").on("click", function() {
 		bodyOverfloawHidden();

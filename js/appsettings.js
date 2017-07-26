@@ -123,7 +123,12 @@ $.extend({
     //调用原生做初始化
     summer.callService("SummerService.gotoNative", params, false);
     function _getTokenInfo(data) {
-        var data  = data.result;
+        try{
+            var data  = JSON.parse(data.result);
+        }catch (e){
+            var data  = data.result;
+        }
+
         var token = data.token;
         var u_usercode = data.u_usercode;
         try{
